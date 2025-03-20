@@ -4,5 +4,62 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
+    /* overflow-x: hidden;
+    overflow-y: visible; */
+}
+
+/* 内容区样式 */
+.mainContentArea {
+    padding-right: 2rem;
+}
+
+/* 内容部分通用样式 */
+.contentSection {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contentSection h2 {
+    color: #4a6fa5;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.contentSection h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.contentSection p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* 经验项目样式 */
+.experienceItem, .projectItem {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.experienceItem:last-child, .projectItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+/* 粘性侧边栏 */
+.stickySidebar {
+    position: sticky;
+    top: 1rem; /* 距离顶部的距离，可以根据需要调整 */
+    max-height: calc(100vh - 2rem); /* 最大高度，防止内容过多时溢出屏幕 */
+    overflow-y: auto; /* 如果内容太多，允许滚动 */
 }
