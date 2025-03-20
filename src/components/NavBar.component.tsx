@@ -8,12 +8,39 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import { useState } from "react";
+import useScrollSpy from "../util/useScrollSpy";
 
 export default function NavBar() {
     const [open, setOpen] = useState(true);
+    const [activeLink, setActiveLink] = useState(0); 
+
+    // 定義選單項目
+    const menuItems = [
+        { name: 'Profils', link: '#profils' },
+        { name: 'Skills', link: '#skills' },
+        { name: 'Experience', link: '#experience' },
+        { name: 'Projects', link: '#projects' }
+    ];
 
     const handleClick = () => {
         setOpen(!open);
+    };
+
+    useScrollSpy(setActiveLink);
+
+    const handleScroll = (id: number) => {
+        const element = document.getElementById(menuItems[id].name);
+        if (element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+
+    const handleMenuClick = (index:number) => {
+        setActiveLink(index);  
+        handleScroll(index); 
     };
 
     return (
@@ -37,25 +64,33 @@ export default function NavBar() {
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton sx={{ pl: 4 }} href={menuItems[0].link} 
+                    selected={activeLink === 0}
+                    onClick={() => handleMenuClick(0)}>
                     <ListItemIcon>
                         <Person />
                     </ListItemIcon>
                     <ListItemText primary="Profils" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton sx={{ pl: 4 }} href={menuItems[1].link}
+                    selected={activeLink === 1}
+                    onClick={() => handleMenuClick(1)}>
                     <ListItemIcon>
                         <Code />
                     </ListItemIcon>
                     <ListItemText primary="Skills" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton sx={{ pl: 4 }} href={menuItems[2].link}
+                    selected={activeLink === 2}
+                    onClick={() => handleMenuClick(2)}>
                     <ListItemIcon>
                         <WorkHistory />
                     </ListItemIcon>
                     <ListItemText primary="Experience" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton sx={{ pl: 4 }} href={menuItems[3].link}
+                    selected={activeLink === 3}
+                    onClick={() => handleMenuClick(3)}>
                     <ListItemIcon>
                         <DeveloperMode/>
                     </ListItemIcon>

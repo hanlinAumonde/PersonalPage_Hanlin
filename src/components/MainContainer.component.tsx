@@ -7,12 +7,12 @@ export default function MainContainer() {
         <main className={styles.mainContainer}>
             <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible'}}>
                 <Grid size={{xs:10}} sx={{paddingRight: '2rem'}}>
-                    <div className={styles.contentSection}>
+                    <div className={styles.contentSection} id="Profils">
                         <h2>A propos de moi</h2>
                         <p>Introduction personnelle...</p>
                     </div>
                     
-                    <div className={styles.contentSection}>
+                    <div className={styles.contentSection} id="Skills">
                         <h2>Compétences</h2>
                         <p>Énumérez vos compétences techniques et professionnelles ici.</p>
                         <ul>
@@ -22,7 +22,7 @@ export default function MainContainer() {
                         </ul>
                     </div>
                     
-                    <div className={styles.contentSection}>
+                    <div className={styles.contentSection} id="Experience">
                         <h2>Expérience professionnelle</h2>
                         <div className={styles.experienceItem}>
                             <h3>Poste actuel - </h3>
@@ -36,7 +36,7 @@ export default function MainContainer() {
                         </div>
                     </div>
                     
-                    <div className={styles.contentSection}>
+                    <div className={styles.contentSection} id="Projects">
                         <h2>Projets</h2>
                         <p>Montrez vos projets et contributions ici.</p>
                         <div className={styles.projectItem}>
