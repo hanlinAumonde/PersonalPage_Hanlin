@@ -1,5 +1,6 @@
 {
-  "name": "my-app",
+  "name": "personal-page",
+  "homepage": "https://hanlinAumonde.github.io/PersonalPage_Hanlin",
   "private": true,
   "version": "0.0.0",
   "type": "module",
