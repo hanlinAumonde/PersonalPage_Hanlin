@@ -17,12 +17,12 @@ export default function Profil() {
                     passionné par l'informatique, la découverte et l'apprentissage de nouvelles technologies
                     </p>
                     <Box className={styles.logoContainer}>
-                        <img src="public/assets/logo_utc.png" alt="UTC" className={styles.logo} />
+                        <img src="/assets/logo_utc.png" alt="UTC" className={styles.logo} />
                     </Box>
                 </Grid>
                 <Grid size={4}>
                     <Box className={styles.imageWrapper}>
-                        <img src="public/assets/photo.jpg" alt="Hanlin" className={styles.img} />
+                        <img src="/assets/photo.jpg" alt="Hanlin" className={styles.img} />
                     </Box>
                 </Grid>
             </Grid>
