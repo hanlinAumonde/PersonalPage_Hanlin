@@ -13,8 +13,8 @@ import useScrollSpy from "../util/useScrollSpy";
 export default function NavBar() {
     const [open, setOpen] = useState(true);
     const [activeLink, setActiveLink] = useState(0); 
+    const baseUrl = import.meta.env.BASE_URL || '/';
 
-    // 定義選單項目
     const menuItems = [
         { name: 'Profils', link: '#profils' },
         { name: 'Skills', link: '#skills' },
@@ -100,14 +100,14 @@ export default function NavBar() {
         </Collapse>
         <ListItemButton href="https://www.linkedin.com/in/hanlin-wu-559552213/">
             <ListItemIcon >
-                <img src="/assets/LinkedIn_icon.svg" alt="LinkedIn"
+                <img src={`${baseUrl}assets/LinkedIn_icon.svg`} alt="LinkedIn"
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
             <ListItemText primary="LinkedIn HomePage" />
         </ListItemButton>
         <ListItemButton href="https://github.com/hanlinAumonde">
             <ListItemIcon>
-                <img src="/assets/gitHub.png" alt="GitHub" 
+                <img src={`${baseUrl}assets/github.png`} alt="GitHub" 
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
             <ListItemText primary="Github HomePage" />
