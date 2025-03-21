@@ -1,0 +1,51 @@
+/* 技能列表样式 */
+.skillsList {
+    list-style-type: none;
+    padding: 0;
+    padding-right: 1rem;
+    margin: 0;
+}
+
+.skillsList li {
+    margin-bottom: 1.5rem;
+}
+
+.skillsList h3 {
+    margin-bottom: 0.8rem;
+}
+
+.scrollableCardContainer {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden; 
+    padding-bottom: 1rem; 
+    padding-top: 0.8rem; 
+    padding-left: 0.8rem;
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: thin; 
+    gap: 1rem; 
+    width: 100%; 
+    background-color: rgb(236, 236, 202);
+}
+
+.scrollableCardContainer > * {
+    flex-shrink: 0; 
+}
+
+.scrollableCardContainer::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scrollableCardContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.scrollableCardContainer::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.scrollableCardContainer::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

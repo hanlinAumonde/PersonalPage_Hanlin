@@ -1,25 +1,20 @@
 import Grid from "@mui/material/Grid2";
 import styles from "../styles/MainContainer.module.css";
 import NavBar from "./NavBar.component";
+import Profil from "./Contents/Profil.component";
+import Skills from "./Contents/Skills.component";
 
 export default function MainContainer() {
     return (
         <main className={styles.mainContainer}>
             <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible'}}>
                 <Grid size={{xs:10}} sx={{paddingRight: '2rem'}}>
-                    <div className={styles.contentSection} id="Profils">
-                        <h2>A propos de moi</h2>
-                        <p>Introduction personnelle...</p>
+                    <div className={styles.contentSection} style={{backgroundColor: '#cce7ff'}} id="Profils">
+                        <Profil />
                     </div>
                     
-                    <div className={styles.contentSection} id="Skills">
-                        <h2>Compétences</h2>
-                        <p>Énumérez vos compétences techniques et professionnelles ici.</p>
-                        <ul>
-                            <li>Front-end: React, TypeScript, Material UI, ...</li>
-                            <li>Backend: Node.js, Java ...</li>
-                            <li>Autre compétences: Git, Docker, ...</li>
-                        </ul>
+                    <div className={styles.contentSection} style={{backgroundColor:'#fdfde2'}} id="Skills">
+                        <Skills />
                     </div>
                     
                     <div className={styles.contentSection} id="Experience">

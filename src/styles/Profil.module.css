@@ -1,0 +1,49 @@
+.container {
+    padding: 1rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.h2 {
+    color: #495daf;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+
+
+.p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 70%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.logoContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.imageWrapper {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}

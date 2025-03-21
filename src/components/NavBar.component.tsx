@@ -100,14 +100,14 @@ export default function NavBar() {
         </Collapse>
         <ListItemButton href="https://www.linkedin.com/in/hanlin-wu-559552213/">
             <ListItemIcon >
-                <img src="src/assets/LinkedIn_icon.svg" alt="LinkedIn"
+                <img src="public/assets/LinkedIn_icon.svg" alt="LinkedIn"
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
             <ListItemText primary="LinkedIn HomePage" />
         </ListItemButton>
         <ListItemButton href="https://github.com/hanlinAumonde">
             <ListItemIcon>
-                <img src="src/assets/gitHub.png" alt="GitHub" 
+                <img src="public/assets/gitHub.png" alt="GitHub" 
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
             <ListItemText primary="Github HomePage" />
