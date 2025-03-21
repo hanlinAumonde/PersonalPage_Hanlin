@@ -2,11 +2,12 @@ import Grid from "@mui/material/Grid2";
 import styles from "../../styles/Profil.module.css";
 import Box from "@mui/material/Box";
 import { useMediaQuery, useTheme } from "@mui/material";
+import logoUTC from "/assets/utc.png";
+import photo from "/assets/photo.jpg";
 
 export default function Profil() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
     return (
         <Box className={styles.container}>
             <Grid container spacing={isMobile ? 2 : 4} alignItems="center">
@@ -17,12 +18,12 @@ export default function Profil() {
                     passionné par l'informatique, la découverte et l'apprentissage de nouvelles technologies
                     </p>
                     <Box className={styles.logoContainer}>
-                        <img src="/assets/logo_utc.png" alt="UTC" className={styles.logo} />
+                        <img src={logoUTC} alt="UTC" className={styles.logo} />
                     </Box>
                 </Grid>
                 <Grid size={4}>
                     <Box className={styles.imageWrapper}>
-                        <img src="/assets/photo.jpg" alt="Hanlin" className={styles.img} />
+                        <img src={photo} alt="Hanlin" className={styles.img} />
                     </Box>
                 </Grid>
             </Grid>
