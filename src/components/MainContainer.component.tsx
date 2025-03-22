@@ -3,6 +3,7 @@ import styles from "../styles/MainContainer.module.css";
 import NavBar from "./NavBar.component";
 import Profil from "./Contents/Profil.component";
 import Skills from "./Contents/Skills.component";
+import Experience from "./Contents/Experience.component";
 
 export default function MainContainer() {
     return (
@@ -17,18 +18,8 @@ export default function MainContainer() {
                         <Skills />
                     </div>
                     
-                    <div className={styles.contentSection} id="Experience">
-                        <h2>Expérience professionnelle</h2>
-                        <div className={styles.experienceItem}>
-                            <h3>Poste actuel - </h3>
-                            <p className={styles.date}>20XX - 20YY</p>
-                            <p>Decscription de votre travail et réalisations...</p>
-                        </div>
-                        <div className={styles.experienceItem}>
-                            <h3>Poste précédent - </h3>
-                            <p className={styles.date}>20XX - 20YY</p>
-                            <p>Decscription de votre travail et réalisations...</p>
-                        </div>
+                    <div className={styles.contentSection} style={{backgroundColor:'#f2fff0'}} id="Experience">
+                        <Experience />
                     </div>
                     
                     <div className={styles.contentSection} id="Projects">
