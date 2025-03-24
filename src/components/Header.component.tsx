@@ -26,7 +26,7 @@ export default function Header() {
         }
       });
     }, {
-      threshold: 0.1 // 
+      threshold: 0.1 
     });
     
     // 开始观察当前header元素
@@ -49,7 +49,7 @@ export default function Header() {
                     Bonjour ! Je suis Hanlin WU
                 </h1>
                 <h2 className={styles.sous_titre + (isVisible ? ` ${styles.visible}` : "")}>
-                    Jenue diplomé de UTC en 2024, <br/>filère système et réseaux Informatique
+                    Jenue diplomé de l'UTC en 2024
                 </h2>
             </div>
         </header>

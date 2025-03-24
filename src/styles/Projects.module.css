@@ -1,0 +1,205 @@
+.sectionTitle {
+    margin-bottom: 1.5rem;
+    color: #5a81ff;
+  }
+  
+.projectSliderContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 2rem 0;
+  transition: height 0.4s ease;
+  min-height: 350px; /* 设置最小高度防止容器过小 */
+}
+
+.navArrow {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.navArrow:first-child {
+  left: -20px;
+}
+
+.navArrow:last-child {
+  right: -20px;
+}
+
+.projectCard {
+  width: 100%;
+  background-color: #c6fff7;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.fadeTransition {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.projectIcon {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.projectIcon img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.projectName {
+  font-size: 1.5rem;
+  color: #63657e;
+  margin: 0;
+}
+
+.projectContext, 
+.projectFunctionality,
+.projectTechnologies {
+  margin-bottom: 1rem;
+}
+
+.projectContext h4,
+.projectFunctionality h4,
+.projectTechnologies h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #6285b9;
+}
+
+.projectContext p {
+  margin: 0;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #666;
+}
+
+.projectFunctionality ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.projectFunctionality li {
+  margin-bottom: 0.3rem;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #666;
+}
+
+.techIcons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techBadge {
+  padding: 0.3rem 0.8rem;
+  background-color: #a1c4ff;
+  border-radius: 50px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 1000;
+  font-size: 1rem;
+  color: #ffffff;
+  display: inline-block;
+}
+
+.screenshotContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenshot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.screenshot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.screenshotNavigation {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+}
+
+.screenshotNavButton {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  margin-left: 5px !important;
+  padding: 5px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.projectIndicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.activeIndicator {
+  background-color: #666;
+}
+
+@media (max-width: 900px) {
+  .projectCard {
+    padding: 1rem;
+  }
+  
+  .navArrow:first-child {
+    left: -10px;
+  }
+  
+  .navArrow:last-child {
+    right: -10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .projectInfo {
+    margin-bottom: 1rem;
+  }
+  
+  .screenshot {
+    height: 200px;
+  }
+}

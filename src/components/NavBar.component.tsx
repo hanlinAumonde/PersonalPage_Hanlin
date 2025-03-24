@@ -64,7 +64,7 @@ export default function NavBar() {
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }} href={menuItems[0].link} 
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[0].link} 
                     selected={activeLink === 0}
                     onClick={() => handleMenuClick(0)}>
                     <ListItemIcon>
@@ -72,7 +72,7 @@ export default function NavBar() {
                     </ListItemIcon>
                     <ListItemText primary="Profils" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }} href={menuItems[1].link}
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[1].link}
                     selected={activeLink === 1}
                     onClick={() => handleMenuClick(1)}>
                     <ListItemIcon>
@@ -80,7 +80,7 @@ export default function NavBar() {
                     </ListItemIcon>
                     <ListItemText primary="Skills" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }} href={menuItems[2].link}
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[2].link}
                     selected={activeLink === 2}
                     onClick={() => handleMenuClick(2)}>
                     <ListItemIcon>
@@ -88,7 +88,7 @@ export default function NavBar() {
                     </ListItemIcon>
                     <ListItemText primary="Experience" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }} href={menuItems[3].link}
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[3].link}
                     selected={activeLink === 3}
                     onClick={() => handleMenuClick(3)}>
                     <ListItemIcon>
@@ -98,14 +98,14 @@ export default function NavBar() {
                 </ListItemButton>
             </List>
         </Collapse>
-        <ListItemButton href="https://www.linkedin.com/in/hanlin-wu-559552213/">
+        <ListItemButton sx={{":hover":{color:'black'}}} href="https://www.linkedin.com/in/hanlin-wu-559552213/" target="_blank">
             <ListItemIcon >
                 <img src={`${baseUrl}assets/LinkedIn_icon.svg`} alt="LinkedIn"
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
             <ListItemText primary="LinkedIn HomePage" />
         </ListItemButton>
-        <ListItemButton href="https://github.com/hanlinAumonde">
+        <ListItemButton sx={{":hover":{color:'black'}}} href="https://github.com/hanlinAumonde" target="_blank">
             <ListItemIcon>
                 <img src={`${baseUrl}assets/github.png`} alt="GitHub" 
                      style={{ width: '24px', height: '24px' }}/>

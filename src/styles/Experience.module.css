@@ -1,10 +1,10 @@
-.experienceItem, .projectItem {
+.experienceItem {
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #eaeaea;
 }
 
-.experienceItem:last-child, .projectItem:last-child {
+.experienceItem:last-child{
     border-bottom: none;
     padding-bottom: 0;
 }
