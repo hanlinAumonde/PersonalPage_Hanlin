@@ -31,7 +31,7 @@ const projectsData: Project[] = [
       "Mise en œuvre d'un processus préliminaire d'intégration continue avec GitHub Actions et Docker"
     ],
     technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL"],
-    screenshots: ["/chatapp/login-page.jpg", "/chatapp/accueil-page.jpg", "/chatapp/chatroom-page.jpg"],
+    screenshots: ["/chatapp/login-page.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],
     icon: "/chatapp/chat_icon.png"
   },
   {
@@ -46,7 +46,7 @@ const projectsData: Project[] = [
       "Participer à certains développements d'animation CSS"
     ],
     technologies: ["Reactjs", "Nextjs", "MUI", "CSS"],
-    screenshots: ["/lo18/home-page.jpg", "/lo18/programme-page.jpg", "/lo18/evaluation-page.jpg"],
+    screenshots: ["/lo18/home-page.png", "/lo18/programme-page.png", "/lo18/evaluation-page.png"],
     icon: "/lo18/favicon.ico",
     link: "https://www4.utc.fr/lo18"
   },

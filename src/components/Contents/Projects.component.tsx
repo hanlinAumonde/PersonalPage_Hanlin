@@ -10,12 +10,28 @@ function Projects({projectsData}:ProjectsProp){
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isTransitioningImage, setIsTransitioningImage] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [isLandscapeOrientation, setIsLandscapeOrientation] = useState(false);
   const projectCardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   
   const currentProject = projectsData[currentProjectIndex];
   
   const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/projects/';
+
+  // 检测图片方向并设置布局
+  useEffect(() => {
+    if (currentProject.screenshots.length > 0) {
+      const img = new Image();
+      img.onload = () => {
+        // 如果宽高比大于 1.2，就认为是横向布局
+        const isLandscape = img.width / img.height > 1.2;
+        setIsLandscapeOrientation(isLandscape);
+      };
+      img.src = `${baseUrl}${currentProject.screenshots[currentImageIndex]}`;
+    }
+  }, [currentProject, currentImageIndex, baseUrl]);
 
   // 计算并设置容器高度
   const updateContainerHeight = () => {
@@ -33,7 +49,7 @@ function Projects({projectsData}:ProjectsProp){
     return () => {
       window.removeEventListener('resize', updateContainerHeight);
     };
-  }, [currentProject]);
+  }, [currentProject, isLandscapeOrientation]);
   
   const changeProject = (newIndex: number) => {
     if (isTransitioning) return;
@@ -44,11 +60,24 @@ function Projects({projectsData}:ProjectsProp){
       setCurrentImageIndex(0);
       setTimeout(() => {
         setIsTransitioning(false);
+        setIsTransitioningImage(false);
         // 项目切换完成后更新容器高度
         updateContainerHeight();
       }, 50);
     }, 300); // 等待淡出动画完成
   };
+
+  const changeImage = (newIndex: number) => {
+    if (isTransitioningImage) return;
+    
+    setIsTransitioningImage(true);
+    setTimeout(() => {
+      setCurrentImageIndex(newIndex);
+      setTimeout(() => {
+        setIsTransitioningImage(false);
+      },50)
+    }, 300); 
+  }
   
   const goToPreviousProject = () => {
     const newIndex = currentProjectIndex === 0 ? projectsData.length - 1 : currentProjectIndex - 1;
@@ -62,16 +91,18 @@ function Projects({projectsData}:ProjectsProp){
   
   const goToPreviousImage = () => {
     if (currentProject.screenshots.length <= 1) return;
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? currentProject.screenshots.length - 1 : prev - 1
-    );
+    // setCurrentImageIndex((prev) => 
+    //   prev === 0 ? currentProject.screenshots.length - 1 : prev - 1
+    // );
+    changeImage(currentImageIndex === 0 ? currentProject.screenshots.length - 1 : currentImageIndex - 1);
   };
   
   const goToNextImage = () => {
     if (currentProject.screenshots.length <= 1) return;
-    setCurrentImageIndex((prev) => 
-      prev === currentProject.screenshots.length - 1 ? 0 : prev + 1
-    );
+    // setCurrentImageIndex((prev) => 
+    //   prev === currentProject.screenshots.length - 1 ? 0 : prev + 1
+    // );
+    changeImage(currentImageIndex === currentProject.screenshots.length - 1 ? 0 : currentImageIndex + 1);
   };
   
   return (
@@ -95,8 +126,8 @@ function Projects({projectsData}:ProjectsProp){
           className={`${styles.projectCard} ${isTransitioning ? styles.fadeTransition : ''}`}
           ref={projectCardRef}
         >
-          <Grid container spacing={2}>
-            <Grid size={{xs:12, md:6}} className={styles.projectInfo}>
+          <Grid container spacing={2} direction={isLandscapeOrientation ? "column" : "row"}>
+            <Grid size={{xs:12, md: isLandscapeOrientation ? 12 : 6}} className={styles.projectInfo}>
               <div className={styles.projectHeader}>
                 {currentProject.icon && (
                   <div className={styles.projectIcon}>
@@ -136,10 +167,11 @@ function Projects({projectsData}:ProjectsProp){
               </div>
             </Grid>
             
-            <Grid size={{xs:12, md:6}} className={styles.screenshotContainer}>
-              <div className={styles.screenshot}>
+            <Grid size={{xs:12, md: isLandscapeOrientation ? 12 : 6}} className={`${styles.screenshotContainer} ${isTransitioningImage ? styles.fadeTransition : ''}`}>
+              <div className={`${styles.screenshot} ${isLandscapeOrientation ? styles.landscapeScreenshot : ''}`}>
                 {currentProject.screenshots.length > 0 && (
                   <img 
+                    ref={imageRef}
                     src={`${baseUrl}` + currentProject.screenshots[currentImageIndex]} 
                     alt={`${currentProject.name} screenshot`} 
                   />
@@ -150,16 +182,16 @@ function Projects({projectsData}:ProjectsProp){
                     <IconButton 
                       className={styles.screenshotNavButton} 
                       onClick={goToPreviousImage}
-                      aria-label="Previous image"
+                      aria-label="Previous image" size="large"
                     >
-                      <ArrowBackIos fontSize="small" />
+                      <ArrowBackIos fontSize="large" color="primary" />
                     </IconButton>
                     <IconButton 
                       className={styles.screenshotNavButton} 
                       onClick={goToNextImage}
-                      aria-label="Next image"
+                      aria-label="Next image" size="large"
                     >
-                      <ArrowForwardIos fontSize="small" />
+                      <ArrowForwardIos fontSize="large" color="primary" />
                     </IconButton>
                   </div>
                 )}

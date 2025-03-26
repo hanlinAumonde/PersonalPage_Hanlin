@@ -128,15 +128,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  position: relative;
+}
+
+/* Fix: Changed from nested selector to direct combined selector */
+.screenshotContainer.fadeTransition {
+  opacity: 0;
+  transform: scale(0.98);
 }
 
 .screenshot {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.3s ease;
+}
+
+/* Add style for landscape oriented screenshots */
+.landscapeScreenshot {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.landscapeScreenshot img {
+  width: 100%;
+  object-fit: contain;
 }
 
 .screenshot img {
@@ -154,10 +175,10 @@
 }
 
 .screenshotNavButton {
-  background-color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgb(241, 241, 241) !important;
   margin-left: 5px !important;
   padding: 5px !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .projectIndicators {

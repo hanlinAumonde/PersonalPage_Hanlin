@@ -37,7 +37,7 @@ export default function MainContainer() {
             enable: true,
             zIndex: -1
           },
-          fpsLimit: 90,
+          fpsLimit: 120,
           interactivity: {
             events: {
               onClick: {
@@ -54,7 +54,7 @@ export default function MainContainer() {
                 quantity: 4,
               },
               repulse: {
-                distance: 100,
+                distance: 70,
                 duration: 0.4,
               },
             },
@@ -77,7 +77,7 @@ export default function MainContainer() {
                 default: OutMode.out,
               },
               random: false,
-              speed: 6,
+              speed: 3,
               straight: false,
             },
             number: {
