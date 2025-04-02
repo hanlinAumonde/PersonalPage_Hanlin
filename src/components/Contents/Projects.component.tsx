@@ -20,6 +20,16 @@ function Projects({projectsData}:ProjectsProp){
   
   const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/projects/';
 
+  //在组件初次加载时，预加载所有项目的第一张图片
+  useEffect(() => {
+    projectsData.forEach((project) => {
+      if (project.screenshots.length > 0) {
+        const img = new Image();
+        img.src = `${baseUrl}${project.screenshots[0]}`;
+      }
+    });
+  }, [projectsData, baseUrl]);
+
   // 检测图片方向并设置布局
   useEffect(() => {
     if (currentProject.screenshots.length > 0) {
@@ -71,12 +81,16 @@ function Projects({projectsData}:ProjectsProp){
     if (isTransitioningImage) return;
     
     setIsTransitioningImage(true);
-    setTimeout(() => {
-      setCurrentImageIndex(newIndex);
+    const imagePreload = new Image();
+    imagePreload.onload = () => {
       setTimeout(() => {
-        setIsTransitioningImage(false);
-      },50)
-    }, 300); 
+        setCurrentImageIndex(newIndex);
+        setTimeout(() => {
+          setIsTransitioningImage(false);
+        },50)
+      }, 300); 
+    }
+    imagePreload.src = `${baseUrl}${currentProject.screenshots[newIndex]}`;
   }
   
   const goToPreviousProject = () => {
@@ -91,17 +105,11 @@ function Projects({projectsData}:ProjectsProp){
   
   const goToPreviousImage = () => {
     if (currentProject.screenshots.length <= 1) return;
-    // setCurrentImageIndex((prev) => 
-    //   prev === 0 ? currentProject.screenshots.length - 1 : prev - 1
-    // );
     changeImage(currentImageIndex === 0 ? currentProject.screenshots.length - 1 : currentImageIndex - 1);
   };
   
   const goToNextImage = () => {
     if (currentProject.screenshots.length <= 1) return;
-    // setCurrentImageIndex((prev) => 
-    //   prev === currentProject.screenshots.length - 1 ? 0 : prev + 1
-    // );
     changeImage(currentImageIndex === currentProject.screenshots.length - 1 ? 0 : currentImageIndex + 1);
   };
   

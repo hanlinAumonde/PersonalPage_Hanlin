@@ -10,9 +10,11 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { ISourceOptions, MoveDirection, OutMode, type Container } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useEffect, useMemo, useState } from "react";
+import CustomFab from "../util/CustomFab";
 
 export default function MainContainer() {
     const [init, setInit] = useState(false);
+    const [changeLayout, setChangeLayout] = useState(false);
 
     useEffect(() => {
         initParticlesEngine(async (engine) => {
@@ -101,6 +103,22 @@ export default function MainContainer() {
         [],
     );
 
+    useEffect(()=>{
+      const handleResizeWidth = () => {
+        const width = window.innerWidth;
+        if(width < 1400){
+            setChangeLayout(true);
+        }else{
+            setChangeLayout(false);
+        }
+      }
+      handleResizeWidth();
+      window.addEventListener('resize', handleResizeWidth);
+      return () => {
+        window.removeEventListener('resize', handleResizeWidth);
+      }
+    },[]);
+
     return (
         <main className={styles.mainContainer}>
             {
@@ -113,7 +131,7 @@ export default function MainContainer() {
                     : null
             }
             <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible'}}>
-                <Grid size={{xs:10}} sx={{paddingRight: '2rem'}}>
+                <Grid size={{xs: changeLayout? 12 : 10}} sx={{paddingRight: '2rem'}}>
                     <div className={styles.contentSection} style={{backgroundColor: '#cce7ff'}} id="Profils">
                         <Profil />
                     </div>
@@ -130,12 +148,15 @@ export default function MainContainer() {
                         <Projects projectsData={projectsData}  />
                     </div>
                 </Grid>
-                <Grid size={{xs:2, md:2}} sx={{position: 'relative'}}>
-                    <div className={styles.stickySidebar}>
+                <Grid size={{xs: changeLayout? 0 : 2}} sx={{position: 'relative'}}>
+                    {changeLayout? null:
+                      <div className={styles.stickySidebar}>
                         <NavBar />
-                    </div>
+                      </div>
+                    }
                 </Grid>
             </Grid>
+            <CustomFab changeLayout={changeLayout} />
         </main>
     )
 }
