@@ -133,7 +133,6 @@
   position: relative;
 }
 
-/* Fix: Changed from nested selector to direct combined selector */
 .screenshotContainer.fadeTransition {
   opacity: 0;
   transform: scale(0.98);

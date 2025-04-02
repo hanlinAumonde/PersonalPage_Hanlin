@@ -24,6 +24,7 @@
     padding: 0.5rem;
     border-radius: 1rem;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #112a09;
     background-color: #e8fcba;
     border: 1px solid #e7f8ab;
     animation: 3s shade;
