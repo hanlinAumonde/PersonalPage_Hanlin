@@ -67,6 +67,8 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
                 <Grid size={{xs:12}}>
                     <SpeedDial
                         ariaLabel="SpeedDial menu"
+                        onTouchEnd={() => setTooltipId(-1)}
+                        onMouseLeave={() => setTooltipId(-1)}
                         icon={<SpeedDialIcon />}
                     >
                         {actions.reverse().map((action) => (
@@ -78,6 +80,9 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
                                     title: action.name,
                                     placement: 'left',
                                     open: tooltipId === action.id? true : false,
+                                    onTouchStart: () => {
+                                        setTooltipId(action.id);
+                                    },
                                     onMouseOver: () => {
                                         setTooltipId(action.id);
                                     },
