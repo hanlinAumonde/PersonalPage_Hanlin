@@ -15,6 +15,7 @@ import CustomFab from "../util/CustomFab";
 export default function MainContainer() {
     const [init, setInit] = useState(false);
     const [changeLayout, setChangeLayout] = useState(false);
+    const boxShadowStyle = "18px 18px 0 1px";
 
     useEffect(() => {
         initParticlesEngine(async (engine) => {
@@ -132,19 +133,40 @@ export default function MainContainer() {
             }
             <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible'}}>
                 <Grid size={{xs: changeLayout? 12 : 10}} sx={{paddingRight: '2rem'}}>
-                    <div className={styles.contentSection} style={{backgroundColor: '#cce7ff'}} id="Profils">
+                    <div className={styles.contentSection} 
+                      style={{
+                        background: 'linear-gradient(to right,rgb(187, 232, 251) 0%, rgb(101, 181, 251) 100%)',
+                        boxShadow: boxShadowStyle + ' rgba(98, 134, 205, 0.41)',
+                      }} 
+                      id="Profils">
                         <Profil />
                     </div>
                     
-                    <div className={styles.contentSection} style={{backgroundColor:'#fdfde2'}} id="Skills">
+                    <div className={styles.contentSection} 
+                      style={{
+                        background: 'linear-gradient(to right,rgb(252, 254, 121) 0%, rgb(254, 255, 221) 100%)',
+                        boxShadow: boxShadowStyle + ' rgba(128, 130, 12, 0.44)',
+                      }}
+                      id="Skills">
                         <Skills />
                     </div>
                     
-                    <div className={styles.contentSection} style={{backgroundColor:'#f2fff0'}} id="Experience">
+                    <div className={styles.contentSection} 
+                      style={{
+                        background: 'linear-gradient(to left,rgb(187, 255, 154) 0%, rgb(244, 255, 230) 100%)',
+                        boxShadow: boxShadowStyle + ' rgba(85, 177, 116, 0.52)',
+                      }}
+                      
+                      id="Experience">
                         <Experience />
                     </div>
                     
-                    <div className={styles.contentSection} style={{backgroundColor:'#ebffff'}} id="Projects">
+                    <div className={styles.contentSection} 
+                      style={{
+                        background: 'linear-gradient(to left,rgb(231, 220, 255) 0%, rgb(199, 254, 255) 100%)',
+                        boxShadow: boxShadowStyle + ' rgba(150, 124, 182, 0.41)',
+                      }}
+                      id="Projects">
                         <Projects projectsData={projectsData}  />
                     </div>
                 </Grid>

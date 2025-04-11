@@ -115,7 +115,7 @@ function Projects({projectsData}:ProjectsProp){
   
   return (
     <>
-      <h2 className={styles.sectionTitle} style={{fontSize:36}}>Projets</h2>
+      <h2 className={styles.sectionTitle}>Projets</h2>
       
       <div 
         className={styles.projectSliderContainer} 

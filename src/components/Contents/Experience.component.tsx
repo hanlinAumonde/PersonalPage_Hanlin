@@ -3,7 +3,7 @@ import styles from '../../styles/Experience.module.css';
 export default function Experience() {
     return (
         <>
-            <h2 style={{color:'#4bb823', fontSize:36}}>Expérience professionnelle</h2>
+            <h2 className={styles.h2}>Expérience professionnelle</h2>
             <div className={styles.experienceItem}>
                 <h3 className={styles.h3}>Renault Group - stagiaire développeur Back-end Java EE</h3>
                 <p className={styles.date}>03/2024 - 08/2024</p>

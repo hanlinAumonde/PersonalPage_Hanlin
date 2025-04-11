@@ -1,3 +1,9 @@
+.h2 {
+    color: #c1a11f;
+    font-size: 36px;
+    text-shadow: #f2ff00 0px 0px 10px;
+}
+
 .h3 {
     color: #7c660e;
 }

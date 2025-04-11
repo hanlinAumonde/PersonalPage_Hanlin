@@ -6,7 +6,7 @@ export default function Skills() {
     const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/skills/';
     return (
         <>
-            <h2 style={{fontSize:36, color:'#c1a11f'}}>Compétences</h2>
+            <h2 className={styles.h2}>Compétences</h2>
             <ul className={styles.skillsList}>
                 <li>
                     <h3 className={styles.h3}>Front-end:</h3>

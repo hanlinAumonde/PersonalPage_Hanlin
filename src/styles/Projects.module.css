@@ -1,6 +1,8 @@
 .sectionTitle {
     margin-bottom: 1.5rem;
     color: #5a81ff;
+    font-size: 36px;
+    text-shadow: #6396f4 0px 0px 8px;
   }
   
 .projectSliderContainer {
@@ -31,7 +33,7 @@
 
 .projectCard {
   width: 100%;
-  background-color: #c6fff7;
+  background-color: #eff5ff;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
