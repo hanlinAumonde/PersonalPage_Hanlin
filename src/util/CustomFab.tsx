@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid2'
 import { blue } from '@mui/material/colors'
 import UpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Code, DeveloperMode, Person, WorkHistory } from "@mui/icons-material";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type handleClickFunction = () => void
 type CustomFabProps = {
@@ -13,6 +13,15 @@ type CustomFabProps = {
 const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => { 
     const baseUrl = import.meta.env.BASE_URL || '/';
     const [tooltipId, setTooltipId] = useState(-1);
+    const timeoutRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current as number);
+            }
+        }
+    }, []);
 
     const fabBlueStyle = {
         color: 'common.white',
@@ -58,6 +67,14 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
                 window.open(link, '_blank');
             }
         }
+        if(timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        if (tooltipId !== -1) {
+            timeoutRef.current = window.setTimeout(() => {
+                setTooltipId(-1);
+            }, 1000); // 1 second delay before hiding the tooltip
+        }
     };
 
     return (
@@ -67,7 +84,6 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
                 <Grid size={{xs:12}}>
                     <SpeedDial
                         ariaLabel="SpeedDial menu"
-                        onTouchEnd={() => setTooltipId(-1)}
                         onMouseLeave={() => setTooltipId(-1)}
                         icon={<SpeedDialIcon />}
                     >
@@ -82,6 +98,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
                                     open: tooltipId === action.id? true : false,
                                     onTouchStart: () => {
                                         setTooltipId(action.id);
+                                        handleScroll(action.id);
                                     },
                                     onMouseOver: () => {
                                         setTooltipId(action.id);
