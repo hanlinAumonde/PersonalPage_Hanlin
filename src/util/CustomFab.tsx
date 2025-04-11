@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid2'
 import { blue } from '@mui/material/colors'
 import UpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Code, DeveloperMode, Person, WorkHistory } from "@mui/icons-material";
+import { useState } from 'react';
 
 type handleClickFunction = () => void
 type CustomFabProps = {
@@ -11,6 +12,7 @@ type CustomFabProps = {
 
 const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => { 
     const baseUrl = import.meta.env.BASE_URL || '/';
+    const [tooltipId, setTooltipId] = useState(-1);
 
     const fabBlueStyle = {
         color: 'common.white',
@@ -64,14 +66,23 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
             {changeLayout &&
                 <Grid size={{xs:12}}>
                     <SpeedDial
-                        ariaLabel="SpeedDial basic example"
+                        ariaLabel="SpeedDial menu"
                         icon={<SpeedDialIcon />}
                     >
                         {actions.reverse().map((action) => (
                         <SpeedDialAction
                             key={action.name}
                             icon={action.icon}
-                            title={action.name}
+                            slotProps={{
+                                tooltip:{
+                                    title: action.name,
+                                    placement: 'left',
+                                    open: tooltipId === action.id? true : false,
+                                    onMouseOver: () => {
+                                        setTooltipId(action.id);
+                                    },
+                                }
+                            }}
                             onClick={() => handleScroll(action.id)}
                         />
                         ))}
