@@ -1,7 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import Slider, { sliderClasses } from "@mui/material/Slider";
 
 export enum skillLevel {
     beginner = 0,
@@ -16,7 +15,7 @@ interface CardKanbanProps {
     level: skillLevel;
 }
 
-const CardKanban:React.FC<CardKanbanProps>  = ({logoUrl, name, level}) => {
+const CardKanban:React.FC<CardKanbanProps>  = ({logoUrl, name}) => {
   const family =
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
   return (
@@ -46,7 +45,7 @@ const CardKanban:React.FC<CardKanbanProps>  = ({logoUrl, name, level}) => {
         >
           {name}
         </Box>
-        <Box display={"flex"} alignItems={"center"}>
+          {/*<Box display={"flex"} alignItems={"center"}>
           <Slider
             value={25 * (level + 1)}
             defaultValue={50}
@@ -78,7 +77,7 @@ const CardKanban:React.FC<CardKanbanProps>  = ({logoUrl, name, level}) => {
           >
             {skillLevel[level]}
           </Box>
-        </Box>
+        </Box>*/}
       </Box>
     </Card>
   );

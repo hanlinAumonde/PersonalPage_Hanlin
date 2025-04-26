@@ -23,15 +23,17 @@ const projectsData: Project[] = [
               les messages sont actualisés en temps réel par l'application.",
     missions: [
       "Création de la partie frontend de l'application avec Angular 17+, incluant la mise en page CSS, les requêtes API, la gestion des websockets, le routage des pages, etc.",
-      "Implémentation du module de gestion de connexion backend avec Spring Security, réalisation d'une séparation complète frontend/backend, et gestion de l'état de connexion via la solution JWTtoken",
-      "Mise en œuvre du modèle MVC côté backend ainsi que des API RESTful, établissement de connexions à la base de données et des services CRUD correspondants",
+      "Implémentation du module de gestion de connexion backend avec Spring Security, ainsi que les différents moyens de connexion en parallèle, y compris la connexion par e-mail et la connexion par code de vérification",
+      "Réalisation d'une séparation complète frontend/backend, et gestion de l'état de connexion via la solution JWTtoken",
+      "Mise en œuvre du côté backend ainsi que des API RESTful, établissement de connexions à la base de données et des services CRUD correspondants",
       "Implémentation d'un serveur websocket basé sur Spring Boot pour gérer les conversations entre utilisateurs",
       "Utilisation d'une base de données pour gérer les différentes données de l'application",
       "Intégrer RabbitMQ pour gérer les demandes de réinitialisation de mot de passe des utilisateurs",
-      "Mise en œuvre d'un processus préliminaire d'intégration continue avec GitHub Actions et Docker"
+      "Mise en œuvre d'un processus préliminaire d'intégration continue avec GitHub Actions et Docker/Docker Compose",
+      "Déployer l'application sur un serveur cloud (AWS EC2) avec Docker et Nginx"
     ],
     technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL"],
-    screenshots: ["/chatapp/login-page.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],
+    screenshots: ["/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],
     icon: "/chatapp/chat_icon.png"
   },
   {

@@ -1,5 +1,4 @@
-import CardKanban from "../../util/cardKanban";
-import {skillLevel} from "../../util/cardKanban";
+import CardKanban, {skillLevel} from "../../util/cardKanban";
 import styles from "../../styles/Skills.module.css";
 
 export default function Skills() {
@@ -48,6 +47,8 @@ export default function Skills() {
                             <CardKanban logoUrl={`${baseUrl}websocket.svg`} name="WebSocket" level={skillLevel.intermediate}/>
                             <CardKanban logoUrl={`${baseUrl}oauth.svg`} name="OAuth2 / OIDC" level={skillLevel.beginner}/>
                             <CardKanban logoUrl={`${baseUrl}api.svg`} name="Restful API" level={skillLevel.beginner}/>
+                            <CardKanban logoUrl={`${baseUrl}aws.svg`} name={"AWS"} level={skillLevel.beginner}/>
+                            <CardKanban logoUrl={`${baseUrl}nginx.svg`} name={"Nginx"} level={skillLevel.beginner}/>
                         </div>
                     </div>
                 </li>

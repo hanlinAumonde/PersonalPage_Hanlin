@@ -10,11 +10,11 @@ const useScrollSpy = (setActiveLink:Dispatch<SetStateAction<number>>) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const index = sectionIds.indexOf(entry.target.id);
-                        setActiveLink(index);  
+                        setActiveLink(index);
                     }
                 });
             },
-            { threshold: 0.6 } 
+            { threshold: [0.3,0.6,1.0] }
         );
 
         sections.forEach(section => {
