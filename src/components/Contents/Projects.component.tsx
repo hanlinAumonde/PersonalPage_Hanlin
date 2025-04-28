@@ -87,6 +87,8 @@ function Projects({projectsData}:ProjectsProp){
         setCurrentImageIndex(newIndex);
         setTimeout(() => {
           setIsTransitioningImage(false);
+          // 更新容器高度
+          updateContainerHeight();
         },50)
       }, 300); 
     }
