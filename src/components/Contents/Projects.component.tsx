@@ -156,6 +156,12 @@ function Projects({projectsData}:ProjectsProp){
                     <Link href={currentProject.link} target="_blank" color="inherit">{currentProject.link}</Link>
                   </>
                 )}
+                {currentProject.repo && (
+                  <>
+                    <p>Code source : </p>
+                    <Link href={currentProject.repo} target="_blank" color="inherit">{currentProject.repo}</Link>
+                  </>
+                )}
               </div>
               
               <div className={styles.projectFunctionality}>

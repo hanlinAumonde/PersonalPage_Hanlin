@@ -33,7 +33,7 @@ export default function MainContainer() {
         () => ({
           background: {
             color: {
-              value: "#edf2fd"
+              value: "#EEF8FD"//"#edf2fd"
             }
           },
           fullScreen: {

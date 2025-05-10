@@ -1,8 +1,10 @@
 .mainContainer {
-    flex: 1;
-    padding: 2rem;
+    /*make this container in center of page (horizontal)*/
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 10%;
+    padding-right: 10%;
     width: 100%;
-    max-width: 100%;
     box-sizing: border-box;
 }
 

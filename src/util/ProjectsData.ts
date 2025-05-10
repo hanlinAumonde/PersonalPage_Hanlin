@@ -6,6 +6,7 @@ interface Project {
   technologies: string[];
   screenshots: string[];
   icon?: string;
+  repo?: string;
   link?: string;
 }
 
@@ -29,12 +30,14 @@ const projectsData: Project[] = [
       "Implémentation d'un serveur websocket basé sur Spring Boot pour gérer les conversations entre utilisateurs",
       "Utilisation d'une base de données pour gérer les différentes données de l'application",
       "Intégrer RabbitMQ pour gérer les demandes de réinitialisation de mot de passe des utilisateurs",
+      "Intégrer Redis pour gérer les sessions des utilisateurs dans le cas de plusieurs instances de l'application",
       "Mise en œuvre d'un processus préliminaire d'intégration continue avec GitHub Actions et Docker/Docker Compose",
       "Déployer l'application sur un serveur cloud (AWS EC2) avec Docker et Nginx"
     ],
-    technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL"],
+    technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
     screenshots: ["/chatapp/architecture.png", "/chatapp/CI-CD.png","/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],
-    icon: "/chatapp/chat_icon.png"
+    icon: "/chatapp/chat_icon.png",
+    repo: "https://github.com/hanlinAumonde/SimpleChatApp_Devops"
   },
   {
     id: 2,
@@ -65,7 +68,25 @@ const projectsData: Project[] = [
     ],
     technologies: ["C++", "QT", "Cmake"],
     screenshots: ["/cppqt/calculatrice.jpg"],
-    icon: "/cppqt/calculateur_icon.png"
+    icon: "/cppqt/calculateur_icon.png",
+    repo:"https://github.com/hanlinAumonde/projet-comput-Science"
+  },
+  {
+    id:4,
+    name:"LocalTaggedVideo_ManagementTool",
+    context: "Un petit outil simple pour visualiser et rechercher des fichiers vidéo locaux, \
+             utilisant une base de données MongoDB pour stocker et récupérer les informations d'étiquetage des fichiers vidéo, \
+             permettant d'ajouter des étiquettes aux vidéos et de rechercher des vidéos par étiquette.",
+    missions: [
+      "Parcourir et organiser les fichiers vidéo locaux avec tri et recherche intégrés",
+      "Ajouter et supprimer des tags aux fichiers vidéo sélectionnés",
+      "Rechercher des vidéos par un ou plusieurs tags avec suggestions automatiques",
+      "Intégration avec MongoDB, avec démarrage automatique d'un conteneur Docker si nécessaire"
+    ],
+    technologies: ["Python", "MongoDB", "Tkinter", "Docker"],
+    screenshots:["/videoTagManage/1.png", "/videoTagManage/2.png", "/videoTagManage/3.png"],
+    icon:"/videoTagManage/tags.ico",
+    repo:"https://github.com/hanlinAumonde/Manage_LocalTaggedVideo"
   }
 ];
 

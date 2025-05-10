@@ -30,6 +30,7 @@ export default function Skills() {
                             <CardKanban logoUrl={`${baseUrl}golang.svg`} name="Golang" level={skillLevel.beginner}/>
                             <CardKanban logoUrl={`${baseUrl}sql.svg`} name="SQL" level={skillLevel.intermediate}/>
                             <CardKanban logoUrl={`${baseUrl}spring.svg`} name="Spring-boot" level={skillLevel.intermediate}/>
+                            <CardKanban logoUrl={`${baseUrl}fastapi.svg`} name="FastAPI" level={skillLevel.beginner}/>
                             <CardKanban logoUrl={`${baseUrl}apache-camel.svg`} name="Apache Camel" level={skillLevel.intermediate}/>
                             <CardKanban logoUrl={`${baseUrl}postgresql.svg`} name="PostgreSQL" level={skillLevel.intermediate}/>
                             <CardKanban logoUrl={`${baseUrl}mongodb.svg`} name="MongoDB" level={skillLevel.intermediate}/>
