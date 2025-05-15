@@ -1,59 +1,88 @@
+// Projects.component.tsx avec transitions d'image préservées
+
 import { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/Projects.module.css';
 import Grid from "@mui/material/Grid2";
-import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import { GitHub, Language, ChevronLeft, ChevronRight } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
-import { ProjectsProp } from '../../util/ProjectsData';
-import { Link } from '@mui/material';
+import { ProjectsProp } from '../../util/TextContent/ProjectsData';
 
-function Projects({projectsData}:ProjectsProp){
+function Projects({projectsData}: ProjectsProp) {
+  // État pour suivre les indices et transitions
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isTransitioningImage, setIsTransitioningImage] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  
+  // État pour gérer la hauteur du conteneur
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [isLandscapeOrientation, setIsLandscapeOrientation] = useState(false);
+  
+  // Références pour mesurer les éléments DOM
+  const projectsRef = useRef<HTMLElement>(null);
   const projectCardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   
   const currentProject = projectsData[currentProjectIndex];
-  
   const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/projects/';
 
-  //在组件初次加载时，预加载所有项目的第一张图片
+  // Animation au défilement
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (projectsRef.current) {
+      observer.observe(projectsRef.current);
+    }
+    
+    return () => {
+      if (projectsRef.current) {
+        observer.unobserve(projectsRef.current);
+      }
+    };
+  }, []);
+
+  // Préchargement des images
   useEffect(() => {
     projectsData.forEach((project) => {
       if (project.screenshots.length > 0) {
-        const img = new Image();
-        img.src = `${baseUrl}${project.screenshots[0]}`;
+        const preloadImage = new Image();
+        preloadImage.src = `${baseUrl}${project.screenshots[0]}`;
       }
     });
   }, [projectsData, baseUrl]);
-
-  // 检测图片方向并设置布局
+  
+  // Détection de l'orientation de l'image
   useEffect(() => {
     if (currentProject.screenshots.length > 0) {
       const img = new Image();
       img.onload = () => {
-        // 如果宽高比大于 1.2，就认为是横向布局
+        // Si le ratio largeur/hauteur est supérieur à 1.2, considérer comme paysage
         const isLandscape = img.width / img.height > 1.2;
         setIsLandscapeOrientation(isLandscape);
       };
       img.src = `${baseUrl}${currentProject.screenshots[currentImageIndex]}`;
     }
   }, [currentProject, currentImageIndex, baseUrl]);
-
-  // 计算并设置容器高度
+  
+  // Calcul et mise à jour de la hauteur du conteneur
   const updateContainerHeight = () => {
     if (projectCardRef.current) {
       setContainerHeight(projectCardRef.current.offsetHeight);
     }
   };
   
-  // 在组件挂载和项目切换后更新高度
+  // Mise à jour de la hauteur lors du changement de projet ou de redimensionnement
   useEffect(() => {
     updateContainerHeight();
-    // 添加窗口大小变化监听器
+    
     window.addEventListener('resize', updateContainerHeight);
     
     return () => {
@@ -61,6 +90,7 @@ function Projects({projectsData}:ProjectsProp){
     };
   }, [currentProject, isLandscapeOrientation]);
   
+  // Changement de projet avec transitions
   const changeProject = (newIndex: number) => {
     if (isTransitioning) return;
     
@@ -70,15 +100,15 @@ function Projects({projectsData}:ProjectsProp){
       setCurrentImageIndex(0);
       setTimeout(() => {
         setIsTransitioning(false);
-        setIsTransitioningImage(false);
-        // 项目切换完成后更新容器高度
+        // Mise à jour de la hauteur après transition
         updateContainerHeight();
       }, 50);
-    }, 300); // 等待淡出动画完成
+    }, 300);
   };
 
+  // Changement d'image avec transitions et préchargement
   const changeImage = (newIndex: number) => {
-    if (isTransitioningImage) return;
+    if (isTransitioningImage || currentImageIndex === newIndex) return;
     
     setIsTransitioningImage(true);
     const imagePreload = new Image();
@@ -87,14 +117,15 @@ function Projects({projectsData}:ProjectsProp){
         setCurrentImageIndex(newIndex);
         setTimeout(() => {
           setIsTransitioningImage(false);
-          // 更新容器高度
+          // Mise à jour de la hauteur après transition
           updateContainerHeight();
-        },50)
-      }, 300); 
-    }
+        }, 50);
+      }, 300);
+    };
     imagePreload.src = `${baseUrl}${currentProject.screenshots[newIndex]}`;
-  }
+  };
   
+  // Navigation entre projets
   const goToPreviousProject = () => {
     const newIndex = currentProjectIndex === 0 ? projectsData.length - 1 : currentProjectIndex - 1;
     changeProject(newIndex);
@@ -105,140 +136,142 @@ function Projects({projectsData}:ProjectsProp){
     changeProject(newIndex);
   };
   
-  const goToPreviousImage = () => {
-    if (currentProject.screenshots.length <= 1) return;
-    changeImage(currentImageIndex === 0 ? currentProject.screenshots.length - 1 : currentImageIndex - 1);
-  };
-  
-  const goToNextImage = () => {
-    if (currentProject.screenshots.length <= 1) return;
-    changeImage(currentImageIndex === currentProject.screenshots.length - 1 ? 0 : currentImageIndex + 1);
-  };
-  
   return (
-    <>
+    <section 
+      ref={projectsRef} 
+      className={`${styles.projectsSection} ${isVisible ? styles.visible : ""}`}
+    >
       <h2 className={styles.sectionTitle}>Projets</h2>
-      
-      <div 
-        className={styles.projectSliderContainer} 
-        style={{ height: containerHeight ? `${containerHeight + 40}px` : 'auto' }}
-      >
+      <div className={styles.carouselControls}>
         <IconButton 
-          className={styles.navArrow} 
+          className={styles.carouselArrow} 
           onClick={goToPreviousProject}
-          aria-label="Previous project"
           disabled={isTransitioning}
+          aria-label="Projet précédent"
         >
-          <ArrowBackIos />
+          <ChevronLeft />
         </IconButton>
         
+        <div className={styles.indicators}>
+          {projectsData.map((_, index) => (
+            <button 
+              key={index}
+              className={`${styles.indicator} ${index === currentProjectIndex ? styles.activeIndicator : ''}`}
+              onClick={() => changeProject(index)}
+              aria-label={`Aller au projet ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        <IconButton 
+          className={styles.carouselArrow} 
+          onClick={goToNextProject}
+          disabled={isTransitioning}
+          aria-label="Projet suivant"
+        >
+          <ChevronRight />
+        </IconButton>
+      </div>
+      <div 
+        className={styles.projectSliderContainer}
+        style={{ height: containerHeight ? `${containerHeight + 40}px` : 'auto' }}
+      >
         <div 
-          className={`${styles.projectCard} ${isTransitioning ? styles.fadeTransition : ''}`}
+          className={`${styles.projectCard} ${isTransitioning ? styles.transitioning : ''}`}
           ref={projectCardRef}
         >
-          <Grid container spacing={2} direction={isLandscapeOrientation ? "column" : "row"}>
-            <Grid size={{xs:12, md: isLandscapeOrientation ? 12 : 6}} className={styles.projectInfo}>
-              <div className={styles.projectHeader}>
-                {currentProject.icon && (
-                  <div className={styles.projectIcon}>
-                    <img src={`${baseUrl}` + currentProject.icon} alt={`${currentProject.name} icon`} />
+          <Grid container spacing={3}>
+            <Grid size={12} sx={{md:7}}>
+              <div className={styles.projectInfo}>
+                <div className={styles.projectHeader}>
+                  {currentProject.icon && (
+                    <div className={styles.projectIcon}>
+                      <img src={`${baseUrl}${currentProject.icon}`} alt={`${currentProject.name} icône`} />
+                    </div>
+                  )}
+                  <h3 className={styles.projectName}>{currentProject.name}</h3>
+                </div>
+                
+                <div className={styles.projectContext}>
+                  <p>{currentProject.context}</p>
+                </div>
+                
+                <div className={styles.projectLinks}>
+                  {currentProject.repo && (
+                    <a 
+                      href={currentProject.repo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles.projectLink}
+                    >
+                      <GitHub fontSize="small" />
+                      <span>Code source</span>
+                    </a>
+                  )}
+                  
+                  {currentProject.link && (
+                    <a 
+                      href={currentProject.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles.projectLink}
+                    >
+                      <Language fontSize="small" />
+                      <span>Site web</span>
+                    </a>
+                  )}
+                </div>
+                
+                <div className={styles.projectMissions}>
+                  <h4>Missions réalisées</h4>
+                  <ul>
+                    {currentProject.missions.map((mission, index) => (
+                      <li key={index}>{mission}</li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className={styles.projectTechnologies}>
+                  <h4>Technologies utilisées</h4>
+                  <div className={styles.techTags}>
+                    {currentProject.technologies.map((tech, index) => (
+                      <span key={index} className={styles.techTag}>{tech}</span>
+                    ))}
                   </div>
-                )}
-                <h3 className={styles.projectName}>{currentProject.name}</h3>
-              </div>
-              
-              <div className={styles.projectContext}>
-                <h4>Context</h4>
-                <p>{currentProject.context}</p>
-                {currentProject.link && (
-                  <>
-                    <p>Lien du site : </p>
-                    <Link href={currentProject.link} target="_blank" color="inherit">{currentProject.link}</Link>
-                  </>
-                )}
-                {currentProject.repo && (
-                  <>
-                    <p>Code source : </p>
-                    <Link href={currentProject.repo} target="_blank" color="inherit">{currentProject.repo}</Link>
-                  </>
-                )}
-              </div>
-              
-              <div className={styles.projectFunctionality}>
-                <h4>Missions réalisés</h4>
-                <ul>
-                  {currentProject.missions.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className={styles.projectTechnologies}>
-                <h4>Tech-util:</h4>
-                <div className={styles.techIcons}>
-                  {currentProject.technologies.map((tech, index) => (
-                    <div key={index} className={styles.techBadge}>{tech}</div>
-                  ))}
                 </div>
               </div>
             </Grid>
-            
-            <Grid size={{xs:12, md: isLandscapeOrientation ? 12 : 6}} className={`${styles.screenshotContainer} ${isTransitioningImage ? styles.fadeTransition : ''}`}>
-              <div className={`${styles.screenshot} ${isLandscapeOrientation ? styles.landscapeScreenshot : ''}`}>
-                {currentProject.screenshots.length > 0 && (
-                  <img 
-                    ref={imageRef}
-                    src={`${baseUrl}` + currentProject.screenshots[currentImageIndex]} 
-                    alt={`${currentProject.name} screenshot`} 
-                  />
-                )}
-                
-                {currentProject.screenshots.length > 1 && (
-                  <div className={styles.screenshotNavigation}>
-                    <IconButton 
-                      className={styles.screenshotNavButton} 
-                      onClick={goToPreviousImage}
-                      aria-label="Previous image" size="large"
-                    >
-                      <ArrowBackIos fontSize="large" color="primary" />
-                    </IconButton>
-                    <IconButton 
-                      className={styles.screenshotNavButton} 
-                      onClick={goToNextImage}
-                      aria-label="Next image" size="large"
-                    >
-                      <ArrowForwardIos fontSize="large" color="primary" />
-                    </IconButton>
+            <Grid size={12} sx={{md:5}}>
+              <div className={styles.projectGallery}>
+                <div className={`${styles.screenshot} ${isLandscapeOrientation ? styles.landscapeScreenshot : ''}`}>
+                  <div className={`${styles.screenshotContainer} ${isTransitioningImage ? styles.fadeTransition : ''}`}>
+                    {currentProject.screenshots.length > 0 && (
+                      <img 
+                        ref={imageRef}
+                        src={`${baseUrl}${currentProject.screenshots[currentImageIndex]}`} 
+                        alt={`${currentProject.name} capture d'écran`} 
+                      />
+                    )}
                   </div>
-                )}
+                </div>
+                {currentProject.screenshots.length > 1 && (
+                    <div className={styles.screenshotNavigation}>
+                      {currentProject.screenshots.map((_, index) => (
+                        <button
+                          key={index}
+                          className={`${styles.screenshotDot} ${index === currentImageIndex ? styles.activeDot : ''}`}
+                          onClick={() => changeImage(index)}
+                          aria-label={`Image ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
               </div>
             </Grid>
           </Grid>
         </div>
-        <IconButton 
-          className={styles.navArrow} 
-          onClick={goToNextProject}
-          aria-label="Next project"
-          disabled={isTransitioning}
-        >
-          <ArrowForwardIos />
-        </IconButton>
       </div>
-      
-      <div className={styles.projectIndicators}>
-        {projectsData.map((_, index) => (
-          <span 
-            key={index} 
-            className={`${styles.indicator} ${index === currentProjectIndex ? styles.activeIndicator : ''}`}
-            onClick={() => {
-              if (index !== currentProjectIndex && !isTransitioning) {
-                changeProject(index);
-              }
-            }}
-          />
-        ))}
-      </div>
-    </>
+    </section>
   );
 }
 

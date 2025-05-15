@@ -45,7 +45,7 @@ export default function NavBar() {
 
     return (
         <List
-            sx={{ width: '100%', maxWidth: 360, bgcolor: 'rgb(249, 246, 246)' }}
+            sx={{ width: '100%',  bgcolor: 'rgb(249, 246, 246)' }}
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
@@ -103,14 +103,14 @@ export default function NavBar() {
                 <img src={`${baseUrl}assets/LinkedIn_icon.svg`} alt="LinkedIn"
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
-            <ListItemText primary="LinkedIn HomePage" />
+            <ListItemText primary="LinkedIn" />
         </ListItemButton>
         <ListItemButton sx={{":hover":{color:'black'}}} href="https://github.com/hanlinAumonde" target="_blank">
             <ListItemIcon>
                 <img src={`${baseUrl}assets/github.png`} alt="GitHub" 
                      style={{ width: '24px', height: '24px' }}/>
             </ListItemIcon>
-            <ListItemText primary="Github HomePage" />
+            <ListItemText primary="Github" />
         </ListItemButton>
     </List>
     );

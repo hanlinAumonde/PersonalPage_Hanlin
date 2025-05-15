@@ -1,3 +1,5 @@
+// MainContainer.component.tsx - Correctifs pour tsParticles
+
 import Grid from "@mui/material/Grid2";
 import styles from "../styles/MainContainer.module.css";
 import NavBar from "./NavBar.component";
@@ -5,40 +7,48 @@ import Profil from "./Contents/Profil.component";
 import Skills from "./Contents/Skills.component";
 import Experience from "./Contents/Experience.component";
 import Projects from "./Contents/Projects.component";
-import projectsData from "../util/ProjectsData";
+import projectsData from "../util/TextContent/ProjectsData";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { ISourceOptions, MoveDirection, OutMode, type Container } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useEffect, useMemo, useState } from "react";
 import CustomFab from "../util/CustomFab";
+import useWindowWidthChange from "../util/useWindowWidthChange";
 
 export default function MainContainer() {
     const [init, setInit] = useState(false);
-    const [changeLayout, setChangeLayout] = useState(false);
+    const changeLayout = useWindowWidthChange();
     const boxShadowStyle = "18px 18px 0 1px";
 
     useEffect(() => {
-        initParticlesEngine(async (engine) => {
-        await loadSlim(engine);
-        }).then(() => {
-        setInit(true);
-        });
+        // Initialisation du moteur de particules
+        const initializeParticlesEngine = async () => {
+            try {
+                await initParticlesEngine(async (engine) => {
+                    await loadSlim(engine);
+                });
+                setInit(true);
+            } catch (error) {
+                console.error("Erreur lors de l'initialisation de tsParticles:", error);
+            }
+        };
+        
+        initializeParticlesEngine();
     }, []);
 
     const particlesLoaded = async (container?: Container): Promise<void> => {
-        console.log(container);
+        console.log("Particules chargées:", container);
     };
 
     const options: ISourceOptions = useMemo(
         () => ({
           background: {
             color: {
-              value: "#EEF8FD"//"#edf2fd"
+              value:"#EEF8FD" // Couleur de fond des particules
             }
           },
           fullScreen: {
             enable: true,
-            zIndex: -1
           },
           fpsLimit: 120,
           interactivity: {
@@ -104,36 +114,21 @@ export default function MainContainer() {
         [],
     );
 
-    useEffect(()=>{
-      const handleResizeWidth = () => {
-        const width = window.innerWidth;
-        if(width < 1400){
-            setChangeLayout(true);
-        }else{
-            setChangeLayout(false);
-        }
-      }
-      handleResizeWidth();
-      window.addEventListener('resize', handleResizeWidth);
-      return () => {
-        window.removeEventListener('resize', handleResizeWidth);
-      }
-    },[]);
-
     return (
         <main className={styles.mainContainer}>
-            {
-                init? 
+            {/* Particules - assurez-vous qu'elles ont un bon positionnement */}
+                {init ? 
                     <Particles
                         id="tsparticles"
                         particlesLoaded={particlesLoaded}
                         options={options}
                     />
                     : null
-            }
-            <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible'}}>
+                }
+            
+            <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible', position: 'relative', zIndex: 2}}>
                 <Grid size={{xs: changeLayout? 12 : 10}} sx={{paddingRight: '2rem'}}>
-                    <div className={styles.contentSection} 
+                    <div className={`${styles.contentSection} ${styles.profileSection}`} 
                       style={{
                         background: 'linear-gradient(to right,rgb(187, 232, 251) 0%, rgb(101, 181, 251) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(98, 134, 205, 0.41)',
@@ -142,7 +137,7 @@ export default function MainContainer() {
                         <Profil />
                     </div>
                     
-                    <div className={styles.contentSection} 
+                    <div className={`${styles.contentSection} ${styles.skillsSection}`}
                       style={{
                         background: 'linear-gradient(to right,rgb(252, 254, 121) 0%, rgb(254, 255, 221) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(128, 130, 12, 0.44)',
@@ -151,17 +146,16 @@ export default function MainContainer() {
                         <Skills />
                     </div>
                     
-                    <div className={styles.contentSection} 
+                    <div className={`${styles.contentSection} ${styles.experienceSection}`}
                       style={{
                         background: 'linear-gradient(to left,rgb(187, 255, 154) 0%, rgb(244, 255, 230) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(85, 177, 116, 0.52)',
                       }}
-                      
                       id="Experience">
                         <Experience />
                     </div>
                     
-                    <div className={styles.contentSection} 
+                    <div className={`${styles.contentSection} ${styles.projectsSection}`}
                       style={{
                         background: 'linear-gradient(to left,rgb(231, 220, 255) 0%, rgb(199, 254, 255) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(150, 124, 182, 0.41)',
@@ -180,5 +174,5 @@ export default function MainContainer() {
             </Grid>
             <CustomFab changeLayout={changeLayout} />
         </main>
-    )
+    );
 }

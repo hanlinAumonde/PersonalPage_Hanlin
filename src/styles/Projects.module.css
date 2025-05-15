@@ -1,138 +1,138 @@
+/* Projects.module.css avec effets de transition préservés */
+
+.projectsSection {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--transition-timing), 
+              transform 0.8s var(--transition-timing);
+}
+
+.projectsSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .sectionTitle {
-    margin-bottom: 1.5rem;
-    color: #5a81ff;
-    font-size: 36px;
-    text-shadow: #6396f4 0px 0px 8px;
-  }
-  
-.projectSliderContainer {
+  font-family: var(--font-title);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--color-accent-projects);
+  margin-bottom: var(--spacing-8);
   position: relative;
+  padding-bottom: var(--spacing-4);
+}
+
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-accent-projects);
+  border-radius: var(--radius-full);
+}
+
+/* Structure du carrousel */
+.projectSliderContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 2rem 0;
+  margin-bottom: var(--spacing-8);
   transition: height 0.4s ease;
-  min-height: 350px; /* 设置最小高度防止容器过小 */
+  min-height: 350px;
 }
 
-.navArrow {
-  position: absolute;
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-6);
 }
 
-.navArrow:first-child {
-  left: -20px;
+.carouselArrow {
+  background-color: var(--color-bg-primary) !important;
+  box-shadow: var(--shadow-md) !important;
+  color: var(--color-accent-projects) !important;
+  margin: 0 var(--spacing-2) !important;
+  transition: transform var(--transition-normal) var(--transition-timing),
+              box-shadow var(--transition-normal) var(--transition-timing) !important;
 }
 
-.navArrow:last-child {
-  right: -20px;
+.carouselArrow:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg) !important;
 }
 
+.indicators {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: rgba(139, 92, 246, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--transition-timing);
+  padding: 0;
+}
+
+.indicator:hover {
+  background-color: rgba(139, 92, 246, 0.5);
+}
+
+.activeIndicator {
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-accent-projects);
+}
+
+/* Carte de projet */
 .projectCard {
-  width: 100%;
-  background-color: #eff5ff;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  overflow: hidden;
-  opacity: 1;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-lg);
+  transition: opacity 0.3s var(--transition-timing),
+              transform 0.3s var(--transition-timing);
 }
 
-.fadeTransition {
+.projectCard.transitioning {
   opacity: 0;
   transform: scale(0.98);
 }
 
-.projectHeader {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.projectIcon {
-  width: 40px;
-  height: 40px;
-  background-color: #fff;
-  border-radius: 50%;
+/* Galerie d'images */
+.projectGallery {
+  position: relative;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+}
+
+.screenshot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-}
-
-.projectIcon img {
-  width: 60%;
-  height: 60%;
-  object-fit: contain;
-}
-
-.projectName {
-  font-size: 1.5rem;
-  color: #63657e;
-  margin: 0;
-}
-
-.projectContext, 
-.projectFunctionality,
-.projectTechnologies {
-  margin-bottom: 1rem;
-}
-
-.projectContext h4,
-.projectFunctionality h4,
-.projectTechnologies h4 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  color: #6285b9;
-}
-
-.projectContext p {
-  margin: 0;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: #666;
-}
-
-.projectFunctionality ul {
-  margin: 0;
-  padding-left: 1.2rem;
-}
-
-.projectFunctionality li {
-  margin-bottom: 0.3rem;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  color: #666;
-}
-
-.techIcons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.techBadge {
-  padding: 0.3rem 0.8rem;
-  background-color: #a1c4ff;
-  border-radius: 50px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-weight: 1000;
-  font-size: 1rem;
-  color: #ffffff;
-  display: inline-block;
+  box-shadow: var(--shadow-md);
 }
 
 .screenshotContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
   transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 1;
-  position: relative;
 }
 
 .screenshotContainer.fadeTransition {
@@ -140,17 +140,7 @@
   transform: scale(0.98);
 }
 
-.screenshot {
-  position: relative;
-  width: 100%;
-  height: fit-content;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-  transition: max-height 0.3s ease;
-}
-
-/* Add style for landscape oriented screenshots */
+/* Ajustements pour les images orientées paysage */
 .landscapeScreenshot {
   max-width: 100%;
   margin: 0 auto;
@@ -163,65 +153,206 @@
 
 .screenshot img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  transition: transform 0.8s var(--transition-timing);
+}
+
+.screenshot:hover img {
+  transform: scale(1.05);
 }
 
 .screenshotNavigation {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  display: flex;
-}
-
-.screenshotNavButton {
-  background-color: rgb(241, 241, 241) !important;
-  margin-left: 5px !important;
-  padding: 5px !important;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
-}
-
-.projectIndicators {
+  margin-top: var(--spacing-4);
+  bottom: var(--spacing-4);
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  gap: var(--spacing-2);
+  z-index: 10;
 }
 
-.indicator {
-  width: 10px;
-  height: 10px;
+.screenshotDot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: #ddd;
-  margin: 0 5px;
+  background-color: rgba(139, 92, 246, 0.3);
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s var(--transition-timing);
+  padding: 0;
 }
 
-.activeIndicator {
-  background-color: #666;
+.activeDot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(138, 92, 246, 0.548);
 }
 
-@media (max-width: 900px) {
+/* Informations du projet */
+.projectInfo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.projectIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-3);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.projectIcon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.projectName {
+  font-family: var(--font-title);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.projectContext {
+  margin-bottom: var(--spacing-4);
+}
+
+.projectContext p {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.projectLinks {
+  display: flex;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: var(--color-accent-projects);
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-full);
+  background-color: rgba(139, 92, 246, 0.1);
+  transition: all var(--transition-normal) var(--transition-timing);
+}
+
+.projectLink:hover {
+  background-color: rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+.projectMissions {
+  margin-bottom: var(--spacing-4);
+}
+
+.projectMissions h4, .projectTechnologies h4 {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+.projectMissions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projectMissions li {
+  position: relative;
+  padding-left: var(--spacing-6);
+  margin-bottom: var(--spacing-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+.projectMissions li:last-child {
+  margin-bottom: 0;
+}
+
+.projectMissions li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent-projects);
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.techTag {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--color-accent-projects);
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-size: var(--text-xs);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal) var(--transition-timing);
+}
+
+.techTag:hover {
+  background-color: rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Styles responsive */
+@media (max-width: 960px) {
   .projectCard {
-    padding: 1rem;
+    padding: var(--spacing-4);
   }
   
-  .navArrow:first-child {
-    left: -10px;
-  }
-  
-  .navArrow:last-child {
-    right: -10px;
+  .projectInfo {
+    margin-top: var(--spacing-4);
   }
 }
 
 @media (max-width: 600px) {
-  .projectInfo {
-    margin-bottom: 1rem;
+  .projectLinks {
+    flex-direction: column;
+    gap: var(--spacing-2);
   }
   
-  .screenshot {
-    height: 200px;
+  .projectLink {
+    width: 100%;
   }
 }
