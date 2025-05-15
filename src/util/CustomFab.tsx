@@ -79,7 +79,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
 
     return (
         <Grid container direction="column" spacing={2} justifyContent="flex-end" alignItems="flex-end"
-             sx={{ position: 'fixed', bottom: 16, right: 12 }}>
+             sx={{ position: 'fixed', bottom: 16, right: 12, zIndex: 2 }}>
             {changeLayout &&
                 <Grid size={{xs:12}}>
                     <SpeedDial

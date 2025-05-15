@@ -1,57 +1,206 @@
-.h2 {
-    color: #4bb823;
-    font-size: 36px;
-    text-shadow: #63f49f 0px 0px 8px;
+.experienceSection {
+  position: relative;
+  padding-bottom: var(--spacing-8);
+}
+
+.sectionTitle {
+  font-family: var(--font-title);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--color-accent-experience);
+  margin-bottom: var(--spacing-8);
+  position: relative;
+  padding-bottom: var(--spacing-4);
+}
+
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-accent-experience);
+  border-radius: var(--radius-full);
+}
+
+.timeline {
+  position: relative;
+  margin-left: var(--spacing-6);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background-color: rgba(16, 185, 129, 0.3);
+  transform: translateX(-50%);
 }
 
 .experienceItem {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #eaeaea;
+  position: relative;
+  padding-bottom: var(--spacing-12);
+  padding-left: var(--spacing-8);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--transition-timing),
+              transform 0.6s var(--transition-timing);
 }
 
-.experienceItem:last-child{
-    border-bottom: none;
-    padding-bottom: 0;
+.experienceItem.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.date {
-    color: #666;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-style: italic;
-    margin-bottom: 0.5rem;
+.experienceItem:last-child {
+  padding-bottom: 0;
 }
 
-.h3 {
-    color: #296115;
+.timelinePoint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-accent-experience);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
 }
 
-.emphasize {
-    padding: 0.5rem;
-    border-radius: 1rem;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: #112a09;
-    background-color: #e8fcba;
-    border: 1px solid #e7f8ab;
-    animation: 3s shade;
+.experienceHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-4);
 }
 
-@keyframes shade {
-    from {
-        background-color: inherit;
-        border: 1px solid white;
-    }
-
-    to {
-        background-color: #e8fcba;
-        border: 1px solid #e7f8ab;
-    }
+.experienceTitle {
+  margin-bottom: var(--spacing-2);
 }
 
-.emphasize:hover {
-    transform: scale(1.01,1.01);
-    background-color: #e7f8ab;
-    box-shadow: 2px 2px 3px 2px rgba(127,127,127,0.3);
-    transition: all 0.5s ease-in-out;
+.experienceTitle h3 {
+  font-family: var(--font-title);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-2) 0;
 }
+
+.companyBadge {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--color-accent-experience);
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-full);
+}
+
+.periodBadge {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  background-color: rgba(16, 185, 129, 0.05);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-full);
+  font-style: italic;
+}
+
+.achievementsContainer {
+  background-color: var(--color-bg-experienceCard);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal) var(--transition-timing),
+              box-shadow var(--transition-normal) var(--transition-timing);
+}
+
+.achievementsContainer:hover {
+  background-color: var(--color-bg-experienceCard);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.achievementsTitle {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-4);
+  position: relative;
+  padding-bottom: var(--spacing-2);
+}
+
+.achievementsTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-accent-experience);
+  border-radius: var(--radius-full);
+}
+
+.achievementsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achievementItem {
+  position: relative;
+  padding-left: var(--spacing-6);
+  margin-bottom: var(--spacing-3);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+.achievementItem:last-child {
+  margin-bottom: 0;
+}
+
+.achievementItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-accent-experience);
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .experienceHeader {
+    flex-direction: column;
+  }
   
+  .periodBadge {
+    margin-top: var(--spacing-2);
+  }
+  
+  .achievementsContainer {
+    padding: var(--spacing-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline {
+    margin-left: var(--spacing-4);
+  }
+  
+  .experienceItem {
+    padding-left: var(--spacing-6);
+  }
+}
