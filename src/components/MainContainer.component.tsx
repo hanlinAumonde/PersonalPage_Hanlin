@@ -12,8 +12,8 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { ISourceOptions, MoveDirection, OutMode, type Container } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useEffect, useMemo, useState } from "react";
-import CustomFab from "../util/CustomFab";
-import useWindowWidthChange from "../util/useWindowWidthChange";
+import CustomFab from "../util/ui/CustomFab";
+import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
 
 export default function MainContainer() {
     const [init, setInit] = useState(false);
@@ -44,7 +44,7 @@ export default function MainContainer() {
         () => ({
           background: {
             color: {
-              value:"#EEF8FD" // Couleur de fond des particules
+              value: "#F3F2FA" // Couleur de fond des particules
             }
           },
           fullScreen: {
@@ -74,7 +74,7 @@ export default function MainContainer() {
           },
           particles: {
             color: {
-              value: "#949494",
+              value: "#353131",
             },
             links: {
               color: "#c2c2c2",

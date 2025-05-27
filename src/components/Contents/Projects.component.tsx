@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid2";
 import { GitHub, Language, ChevronLeft, ChevronRight } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import { ProjectsProp } from '../../util/TextContent/ProjectsData';
+import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
 
 function Projects({projectsData}: ProjectsProp) {
   // État pour suivre les indices et transitions
@@ -13,43 +14,17 @@ function Projects({projectsData}: ProjectsProp) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isTransitioningImage, setIsTransitioningImage] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  // État pour gérer la hauteur du conteneur
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [isLandscapeOrientation, setIsLandscapeOrientation] = useState(false);
   
-  // Références pour mesurer les éléments DOM
-  const projectsRef = useRef<HTMLElement>(null);
+  const [projectsRef, isVisible] = useIntersectionAnimation<HTMLElement>();
   const projectCardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   
   const currentProject = projectsData[currentProjectIndex];
   const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/projects/';
 
-  // Animation au défilement
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
-    }
-    
-    return () => {
-      if (projectsRef.current) {
-        observer.unobserve(projectsRef.current);
-      }
-    };
-  }, []);
-
-  // Préchargement des images
+  // Préchargement des premiers images de chaque projet
   useEffect(() => {
     projectsData.forEach((project) => {
       if (project.screenshots.length > 0) {

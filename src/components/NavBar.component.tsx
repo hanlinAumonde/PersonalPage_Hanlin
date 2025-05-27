@@ -8,7 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import { useState } from "react";
-import useScrollSpy from "../util/useScrollSpy";
+import useScrollSpy from "../util/hooks/useScrollSpy";
 
 export default function NavBar() {
     const [open, setOpen] = useState(true);

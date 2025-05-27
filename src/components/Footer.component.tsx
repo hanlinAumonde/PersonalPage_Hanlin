@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import styles from "../styles/Footer.module.css";
 import { ArrowUpward, GitHub, LinkedIn } from "@mui/icons-material";
-import useWindowWidthChange from "../util/useWindowWidthChange";
+import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
 
 export default function Footer() {
     const changeLayout = useWindowWidthChange();

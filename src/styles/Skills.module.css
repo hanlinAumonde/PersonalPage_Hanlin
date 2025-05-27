@@ -33,6 +33,15 @@
 
 .categoryContainer {
   margin-bottom: var(--spacing-12);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s var(--transition-timing),
+              transform 0.6s var(--transition-timing);
+}
+
+.categoryContainer.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .categoryTitle {

@@ -1,36 +1,14 @@
-import { useEffect, useRef, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "../../styles/Profil.module.css";
 import { useMediaQuery, useTheme } from "@mui/material";
+import useIntersectionAnimation from "../../util/hooks/useIntersectionAnimation";
 
 export default function Profil() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const baseUrl = import.meta.env.BASE_URL || '/';
   
-  const [isVisible, setIsVisible] = useState(false);
-  const profileRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    if (profileRef.current) {
-      observer.observe(profileRef.current);
-    }
-    
-    return () => {
-      if (profileRef.current) {
-        observer.unobserve(profileRef.current);
-      }
-    };
-  }, []);
+  const [profileRef, isVisible] = useIntersectionAnimation<HTMLDivElement>();
   
   return (
     <div 

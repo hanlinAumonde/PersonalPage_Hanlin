@@ -1,34 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/Experience.module.css';
 import experiences from '../../util/TextContent/ExperienceData';
+import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
+import useMultipleIntersectionAnimation from '../../util/hooks/useMultipleIntersectionAnimation';
 
 export default function Experience() {
-  const [visibleItems, setVisibleItems] = useState<{[key: number]: boolean}>({});
-  const experienceRef = useRef<HTMLElement>(null);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const index = parseInt(entry.target.getAttribute('data-index') || '0');
-          if (entry.isIntersecting) {
-            setVisibleItems(prev => ({...prev, [index]: true}));
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
-    );
-    
-    const elements = document.querySelectorAll(`.${styles.experienceItem}`);
-    elements.forEach(el => observer.observe(el));
-    
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
-  }, []);
+  const [experienceRef, isVisible] = useIntersectionAnimation<HTMLElement>();
+  const visibleItems = useMultipleIntersectionAnimation({
+    targetSelector: `.${styles.experienceItem}`,
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+  });
   
   return (
-    <section ref={experienceRef} className={styles.experienceSection}>
+    <section 
+      ref={experienceRef}
+      className={`${styles.experienceSection} ${isVisible ? styles.visible : ""}`}
+    >
       <h2 className={styles.sectionTitle}>Expérience professionnelle</h2>
       
       <div className={styles.timeline}>

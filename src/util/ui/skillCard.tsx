@@ -1,4 +1,4 @@
-import styles from "../styles/Skills.module.css"
+import styles from "../../styles/Skills.module.css"
 
 // Interface pour définir le niveau de compétence
 interface SkillCardProps {
