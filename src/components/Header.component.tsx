@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import styles from "../styles/Header.module.css";
 import { languageContext } from "../languageContext";
-import { getHeaderText } from "../util/TextContent/header";
+import { getHeaderText } from "../util/TextContent/Header";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
