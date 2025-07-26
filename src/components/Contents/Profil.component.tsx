@@ -2,11 +2,16 @@ import Grid from "@mui/material/Grid2";
 import styles from "../../styles/Profil.module.css";
 import { useMediaQuery, useTheme } from "@mui/material";
 import useIntersectionAnimation from "../../util/hooks/useIntersectionAnimation";
+import { useContext } from "react";
+import { languageContext } from "../../languageContext";
+import { getProfilText } from "../../util/TextContent/ProfilData";
 
 export default function Profil() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const baseUrl = import.meta.env.BASE_URL || '/';
+  const language = useContext(languageContext);
+  const profilText = getProfilText(language);
   
   const [profileRef, isVisible] = useIntersectionAnimation<HTMLDivElement>();
   
@@ -15,7 +20,7 @@ export default function Profil() {
       ref={profileRef} 
       className={`${styles.profileSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>Profil</h2>
+      <h2 className={styles.sectionTitle}>{profilText.sectionTitle}</h2>
       
       <div className={styles.profileContent}>
         <Grid container spacing={isMobile ? 4 : 6} alignItems="center">
@@ -26,12 +31,17 @@ export default function Profil() {
             
             <div className={styles.bio}>
               <p>
-                Jeune Diplômé de <span className={styles.highlight}>l'Université de Technologie de Compiègne</span>, 
-                filière systèmes et réseaux informatiques.
+                {profilText.bio.paragraph1.split('{highlight}').map((part, index) => 
+                  index === 0 ? part : (
+                    <span key={index}>
+                      <span className={styles.highlight}>{profilText.bio.highlight}</span>
+                      {part}
+                    </span>
+                  )
+                )}
               </p>
               <p>
-                Passionné par l'informatique, la découverte et l'apprentissage de nouvelles technologies. 
-                Je cherche à mettre en œuvre mes compétences techniques dans des projets innovants.
+                {profilText.bio.paragraph2}
               </p>
             </div>
             

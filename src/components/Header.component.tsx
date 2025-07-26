@@ -1,11 +1,14 @@
 // Header.component.tsx modernisé
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import styles from "../styles/Header.module.css";
+import { languageContext } from "../languageContext";
+import { getHeaderText } from "../util/TextContent/header";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const headerLanguage = useContext(languageContext);
   const headerRef = useRef(null);
   
   // Effet de défilement parallaxe
@@ -63,10 +66,10 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.content}>
           <h1 className={`${styles.titre} ${isVisible ? styles.visible : ""}`}>
-            Bonjour ! Je suis Hanlin WU
+            {getHeaderText(headerLanguage).title}
           </h1>
           <h2 className={`${styles.sous_titre} ${isVisible ? styles.visible : ""}`}>
-            Jeune diplomé de l'UTC en 2024
+            {getHeaderText(headerLanguage).subtitle}
           </h2>
         </div>
       </div>

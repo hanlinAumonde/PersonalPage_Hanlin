@@ -1,14 +1,18 @@
-// Projects.component.tsx avec transitions d'image préservées
+// Projects.component.tsx avec transitions d'image préservées et support multilingue
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import styles from '../../styles/Projects.module.css';
 import Grid from "@mui/material/Grid2";
 import { GitHub, Language, ChevronLeft, ChevronRight } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
-import { ProjectsProp } from '../../util/TextContent/ProjectsData';
 import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
+import { languageContext } from '../../languageContext';
+import { getProjectsText } from '../../util/TextContent/ProjectsData';
 
-function Projects({projectsData}: ProjectsProp) {
+function Projects() {
+  const language = useContext(languageContext);
+  const projectsText = getProjectsText(language);
+  
   // État pour suivre les indices et transitions
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -21,18 +25,18 @@ function Projects({projectsData}: ProjectsProp) {
   const projectCardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   
-  const currentProject = projectsData[currentProjectIndex];
+  const currentProject = projectsText.projects[currentProjectIndex];
   const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/projects/';
 
   // Préchargement des premiers images de chaque projet
   useEffect(() => {
-    projectsData.forEach((project) => {
+    projectsText.projects.forEach((project) => {
       if (project.screenshots.length > 0) {
         const preloadImage = new Image();
         preloadImage.src = `${baseUrl}${project.screenshots[0]}`;
       }
     });
-  }, [projectsData, baseUrl]);
+  }, [projectsText.projects, baseUrl]);
   
   // Détection de l'orientation de l'image
   useEffect(() => {
@@ -102,12 +106,12 @@ function Projects({projectsData}: ProjectsProp) {
   
   // Navigation entre projets
   const goToPreviousProject = () => {
-    const newIndex = currentProjectIndex === 0 ? projectsData.length - 1 : currentProjectIndex - 1;
+    const newIndex = currentProjectIndex === 0 ? projectsText.projects.length - 1 : currentProjectIndex - 1;
     changeProject(newIndex);
   };
   
   const goToNextProject = () => {
-    const newIndex = currentProjectIndex === projectsData.length - 1 ? 0 : currentProjectIndex + 1;
+    const newIndex = currentProjectIndex === projectsText.projects.length - 1 ? 0 : currentProjectIndex + 1;
     changeProject(newIndex);
   };
   
@@ -116,24 +120,24 @@ function Projects({projectsData}: ProjectsProp) {
       ref={projectsRef} 
       className={`${styles.projectsSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>Projets</h2>
+      <h2 className={styles.sectionTitle}>{projectsText.sectionTitle}</h2>
       <div className={styles.carouselControls}>
         <IconButton 
           className={styles.carouselArrow} 
           onClick={goToPreviousProject}
           disabled={isTransitioning}
-          aria-label="Projet précédent"
+          aria-label={projectsText.previousProjectText}
         >
           <ChevronLeft />
         </IconButton>
         
         <div className={styles.indicators}>
-          {projectsData.map((_, index) => (
+          {projectsText.projects.map((_, index) => (
             <button 
               key={index}
               className={`${styles.indicator} ${index === currentProjectIndex ? styles.activeIndicator : ''}`}
               onClick={() => changeProject(index)}
-              aria-label={`Aller au projet ${index + 1}`}
+              aria-label={`${projectsText.goToProjectText} ${index + 1}`}
             />
           ))}
         </div>
@@ -142,7 +146,7 @@ function Projects({projectsData}: ProjectsProp) {
           className={styles.carouselArrow} 
           onClick={goToNextProject}
           disabled={isTransitioning}
-          aria-label="Projet suivant"
+          aria-label={projectsText.nextProjectText}
         >
           <ChevronRight />
         </IconButton>
@@ -180,7 +184,7 @@ function Projects({projectsData}: ProjectsProp) {
                       className={styles.projectLink}
                     >
                       <GitHub fontSize="small" />
-                      <span>Code source</span>
+                      <span>{projectsText.sourceCodeText}</span>
                     </a>
                   )}
                   
@@ -192,13 +196,13 @@ function Projects({projectsData}: ProjectsProp) {
                       className={styles.projectLink}
                     >
                       <Language fontSize="small" />
-                      <span>Site web</span>
+                      <span>{projectsText.websiteText}</span>
                     </a>
                   )}
                 </div>
                 
                 <div className={styles.projectMissions}>
-                  <h4>Missions réalisées</h4>
+                  <h4>{projectsText.missionsTitle}</h4>
                   <ul>
                     {currentProject.missions.map((mission, index) => (
                       <li key={index}>{mission}</li>
@@ -207,7 +211,7 @@ function Projects({projectsData}: ProjectsProp) {
                 </div>
                 
                 <div className={styles.projectTechnologies}>
-                  <h4>Technologies utilisées</h4>
+                  <h4>{projectsText.technologiesTitle}</h4>
                   <div className={styles.techTags}>
                     {currentProject.technologies.map((tech, index) => (
                       <span key={index} className={styles.techTag}>{tech}</span>

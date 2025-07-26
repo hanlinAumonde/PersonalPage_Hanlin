@@ -1,9 +1,14 @@
 import styles from '../../styles/Experience.module.css';
-import experiences from '../../util/TextContent/ExperienceData';
+import { getExperienceText } from '../../util/TextContent/ExperienceData';
 import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
 import useMultipleIntersectionAnimation from '../../util/hooks/useMultipleIntersectionAnimation';
+import { useContext } from 'react';
+import { languageContext } from '../../languageContext';
 
 export default function Experience() {
+  const language = useContext(languageContext);
+  const experienceText = getExperienceText(language);
+  
   const [experienceRef, isVisible] = useIntersectionAnimation<HTMLElement>();
   const visibleItems = useMultipleIntersectionAnimation({
     targetSelector: `.${styles.experienceItem}`,
@@ -16,10 +21,10 @@ export default function Experience() {
       ref={experienceRef}
       className={`${styles.experienceSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>Expérience professionnelle</h2>
+      <h2 className={styles.sectionTitle}>{experienceText.sectionTitle}</h2>
       
       <div className={styles.timeline}>
-        {experiences.map((experience, index) => (
+        {experienceText.experiences.map((experience, index) => (
           <div 
             key={index}
             data-index={index}
@@ -36,7 +41,7 @@ export default function Experience() {
             </div>
             
             <div className={styles.achievementsContainer}>
-              <h4 className={styles.achievementsTitle}>Réalisations clés</h4>
+              <h4 className={styles.achievementsTitle}>{experienceText.achievementsTitle}</h4>
               <ul className={styles.achievementsList}>
                 {experience.achievements.map((achievement, i) => (
                   <li key={i} className={styles.achievementItem}>

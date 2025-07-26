@@ -2,9 +2,14 @@ import { SkillCard } from "../../util/ui/skillCard";
 import styles from "../../styles/Skills.module.css";
 import useIntersectionAnimation from "../../util/hooks/useIntersectionAnimation";
 import useMultipleIntersectionAnimation from "../../util/hooks/useMultipleIntersectionAnimation";
-import { skillsData } from "../../util/TextContent/SkillsData";
+import { getSkillsText } from "../../util/TextContent/SkillsData";
+import { useContext } from "react";
+import { languageContext } from "../../languageContext";
 
 export default function Skills() {
+  const language = useContext(languageContext);
+  const skillsText = getSkillsText(language);
+  
   const [sectionRef, isVisible] = useIntersectionAnimation<HTMLElement>();
   const visibleCategories = useMultipleIntersectionAnimation({
     targetSelector: `.${styles.categoryContainer}`,
@@ -16,9 +21,9 @@ export default function Skills() {
       ref={sectionRef} 
       className={`${styles.skillsSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>Compétences</h2>
+      <h2 className={styles.sectionTitle}>{skillsText.sectionTitle}</h2>
       
-      {skillsData.map((category, index) => (
+      {skillsText.categories.map((category, index) => (
         <div 
           key={category.id}
           data-index={index}

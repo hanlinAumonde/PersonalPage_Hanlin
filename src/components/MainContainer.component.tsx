@@ -7,15 +7,14 @@ import Profil from "./Contents/Profil.component";
 import Skills from "./Contents/Skills.component";
 import Experience from "./Contents/Experience.component";
 import Projects from "./Contents/Projects.component";
-import projectsData from "../util/TextContent/ProjectsData";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { ISourceOptions, MoveDirection, OutMode, type Container } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, memo } from "react";
 import CustomFab from "../util/ui/CustomFab";
 import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
 
-export default function MainContainer() {
+function MainContainer() {
     const [init, setInit] = useState(false);
     const changeLayout = useWindowWidthChange();
     const boxShadowStyle = "18px 18px 0 1px";
@@ -161,7 +160,7 @@ export default function MainContainer() {
                         boxShadow: boxShadowStyle + ' rgba(150, 124, 182, 0.41)',
                       }}
                       id="Projects">
-                        <Projects projectsData={projectsData}  />
+                        <Projects />
                     </div>
                 </Grid>
                 <Grid size={{xs: changeLayout? 0 : 2}} sx={{position: 'relative'}}>
@@ -176,3 +175,5 @@ export default function MainContainer() {
         </main>
     );
 }
+
+export default memo(MainContainer);

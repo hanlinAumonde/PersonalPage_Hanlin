@@ -2,9 +2,15 @@ import { IconButton } from "@mui/material";
 import styles from "../styles/Footer.module.css";
 import { ArrowUpward, GitHub, LinkedIn } from "@mui/icons-material";
 import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
+import { useContext } from "react";
+import { languageContext } from "../languageContext";
+import { getFooterText } from "../util/TextContent/FooterData";
 
 export default function Footer() {
+    const language = useContext(languageContext);
+    const footerText = getFooterText(language);
     const changeLayout = useWindowWidthChange();
+    
     const handleScrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -18,7 +24,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={styles.scrollTop}>
                 <IconButton 
-                    aria-label="Retour en haut"
+                    aria-label={footerText.scrollToTopText}
                     onClick={handleScrollToTop}
                     className={styles.scrollButton}
                     color='secondary'
@@ -42,7 +48,7 @@ export default function Footer() {
                                 className={styles.socialLink}
                                 >
                                     <GitHub fontSize="small" />
-                                    <span>GitHub</span>
+                                    <span>{footerText.githubText}</span>
                                 </a>
                                 <a 
                                 href="https://www.linkedin.com/in/hanlin-wu-559552213/" 
@@ -51,7 +57,7 @@ export default function Footer() {
                                 className={styles.socialLink}
                                 >
                                     <LinkedIn fontSize="small" />
-                                    <span>LinkedIn</span>
+                                    <span>{footerText.linkedinText}</span>
                                 </a>
                             </>
                         )}
@@ -60,7 +66,7 @@ export default function Footer() {
                         target="_blank" 
                         className={styles.socialLink}
                         >
-                            <span>Résumé</span>
+                            <span>{footerText.resumeText}</span>
                         </a>
                     </div>
                     
@@ -68,10 +74,10 @@ export default function Footer() {
                 
                 <div className={styles.footerBottom}>
                     <p className={styles.copyright}>
-                        &copy; {new Date().getFullYear()} Hanlin WU. Tous droits réservés.
+                        &copy; {new Date().getFullYear()} Hanlin WU. {footerText.copyrightText}
                     </p>
                     <p className={styles.credits}>
-                        Icônes par <a href="https://iconduck.com" target="_blank" rel="noopener noreferrer">iconduck</a>
+                        {footerText.creditsText} <a href="https://www.freepik.com/icons" target="_blank" rel="noopener noreferrer">{footerText.creditsLinkText}</a>
                     </p>
                 </div>
             </div>
