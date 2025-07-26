@@ -140,16 +140,6 @@
   transform: scale(0.98);
 }
 
-/* Ajustements pour les images orientées paysage */
-.landscapeScreenshot {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.landscapeScreenshot img {
-  width: 100%;
-  object-fit: contain;
-}
 
 .screenshot img {
   width: 100%;

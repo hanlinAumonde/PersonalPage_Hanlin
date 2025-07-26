@@ -1,5 +1,3 @@
-// Projects.component.tsx avec transitions d'image préservées et support multilingue
-
 import { useEffect, useRef, useState, useContext } from 'react';
 import styles from '../../styles/Projects.module.css';
 import Grid from "@mui/material/Grid2";
@@ -19,7 +17,6 @@ function Projects() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isTransitioningImage, setIsTransitioningImage] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
-  const [isLandscapeOrientation, setIsLandscapeOrientation] = useState(false);
   
   const [projectsRef, isVisible] = useIntersectionAnimation<HTMLElement>();
   const projectCardRef = useRef<HTMLDivElement>(null);
@@ -42,11 +39,6 @@ function Projects() {
   useEffect(() => {
     if (currentProject.screenshots.length > 0) {
       const img = new Image();
-      img.onload = () => {
-        // Si le ratio largeur/hauteur est supérieur à 1.2, considérer comme paysage
-        const isLandscape = img.width / img.height > 1.2;
-        setIsLandscapeOrientation(isLandscape);
-      };
       img.src = `${baseUrl}${currentProject.screenshots[currentImageIndex]}`;
     }
   }, [currentProject, currentImageIndex, baseUrl]);
@@ -67,7 +59,7 @@ function Projects() {
     return () => {
       window.removeEventListener('resize', updateContainerHeight);
     };
-  }, [currentProject, isLandscapeOrientation]);
+  }, [currentProject]);
   
   // Changement de projet avec transitions
   const changeProject = (newIndex: number) => {
@@ -222,7 +214,7 @@ function Projects() {
             </Grid>
             <Grid size={12} sx={{md:5}}>
               <div className={styles.projectGallery}>
-                <div className={`${styles.screenshot} ${isLandscapeOrientation ? styles.landscapeScreenshot : ''}`}>
+                <div className={`${styles.screenshot}`}>
                   <div className={`${styles.screenshotContainer} ${isTransitioningImage ? styles.fadeTransition : ''}`}>
                     {currentProject.screenshots.length > 0 && (
                       <img 

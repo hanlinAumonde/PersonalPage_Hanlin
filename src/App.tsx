@@ -25,13 +25,14 @@ function App() {
           exclusive
           onChange={changeLanguage}
           aria-label="language"
+          size='small'
           style={{ position: 'absolute', top: 10, right: 10, zIndex: 1000, backgroundColor: 'white' }}
         >
           <ToggleButton value="fr" aria-label="french">
-            Fr
+            <strong>Fr</strong>
           </ToggleButton>
           <ToggleButton value="en" aria-label="english">
-            En
+            <strong>En</strong>
           </ToggleButton>
         </ToggleButtonGroup>
         <languageContext.Provider value={language}>

@@ -25,9 +25,9 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
 
     const fabBlueStyle = {
         color: 'common.white',
-        bgcolor: blue[500],
+        bgcolor: blue[300],
         '&:hover': {
-            bgcolor: blue[600],
+            bgcolor: blue[400],
         },
     };
 
@@ -83,6 +83,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
             {changeLayout &&
                 <Grid size={{xs:12}}>
                     <SpeedDial
+                        FabProps={{ sx: fabBlueStyle as SxProps }}
                         ariaLabel="SpeedDial menu"
                         onMouseLeave={() => setTooltipId(-1)}
                         icon={<SpeedDialIcon />}
@@ -114,7 +115,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
             <Grid size={{xs:12}}>
                 <Fab   
                     sx={fabBlueStyle as SxProps}
-                    aria-label='Expand' color={'primary' as 'primary'}
+                    aria-label='Expand'
                     onClick={handleScroll2TopClick}>
                     <UpIcon />
                 </Fab>
