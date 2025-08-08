@@ -4,20 +4,20 @@ import Grid from "@mui/material/Grid2";
 import { GitHub, Language, ChevronLeft, ChevronRight } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
-import { languageContext } from '../../languageContext';
-import { getProjectsText } from '../../util/TextContent/ProjectsData';
+import { languageContext, LanguageContextType } from '../../languageContext';
+import { getProjectsText, ProjectsText } from '../../util/TextContent/ProjectsData';
 
 function Projects() {
-  const language = useContext(languageContext);
-  const projectsText = getProjectsText(language);
-  
+  const language: LanguageContextType = useContext(languageContext);
+  const projectsText: ProjectsText = getProjectsText(language);
+
   // État pour suivre les indices et transitions
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isTransitioningImage, setIsTransitioningImage] = useState(false);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState<number>(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [isTransitioningImage, setIsTransitioningImage] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
-  
+  const [landScapes, setLandScapes] = useState<boolean[]>(Array(projectsText.projects.length).fill(true));
   const [projectsRef, isVisible] = useIntersectionAnimation<HTMLElement>();
   const projectCardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -27,15 +27,20 @@ function Projects() {
 
   // Préchargement des premiers images de chaque projet
   useEffect(() => {
-    projectsText.projects.forEach((project) => {
+    let landScapes: boolean[] = [];
+    projectsText.projects.forEach((project,index) => {
       if (project.screenshots.length > 0) {
         const preloadImage = new Image();
+        preloadImage.onload = () => {
+          landScapes[index] = preloadImage.width / preloadImage.height > 1.2;
+        };
         preloadImage.src = `${baseUrl}${project.screenshots[0]}`;
       }
     });
+    setLandScapes(landScapes);
   }, [projectsText.projects, baseUrl]);
   
-  // Détection de l'orientation de l'image
+  // Préchargement de l'image actuelle
   useEffect(() => {
     if (currentProject.screenshots.length > 0) {
       const img = new Image();
@@ -52,45 +57,30 @@ function Projects() {
   
   // Mise à jour de la hauteur lors du changement de projet ou de redimensionnement
   useEffect(() => {
-    updateContainerHeight();
-    
     window.addEventListener('resize', updateContainerHeight);
-    
-    return () => {
-      window.removeEventListener('resize', updateContainerHeight);
-    };
+    return () => window.removeEventListener('resize', updateContainerHeight);
   }, [currentProject]);
   
   // Changement de projet avec transitions
   const changeProject = (newIndex: number) => {
     if (isTransitioning) return;
-    
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentProjectIndex(newIndex);
       setCurrentImageIndex(0);
-      setTimeout(() => {
-        setIsTransitioning(false);
-        // Mise à jour de la hauteur après transition
-        updateContainerHeight();
-      }, 50);
+      setTimeout(() => setIsTransitioning(false), 50);
     }, 300);
   };
 
   // Changement d'image avec transitions et préchargement
   const changeImage = (newIndex: number) => {
-    if (isTransitioningImage || currentImageIndex === newIndex) return;
-    
+    if (isTransitioningImage || currentImageIndex === newIndex) return;      
     setIsTransitioningImage(true);
     const imagePreload = new Image();
     imagePreload.onload = () => {
       setTimeout(() => {
         setCurrentImageIndex(newIndex);
-        setTimeout(() => {
-          setIsTransitioningImage(false);
-          // Mise à jour de la hauteur après transition
-          updateContainerHeight();
-        }, 50);
+        setTimeout(() => setIsTransitioningImage(false), 50);
       }, 300);
     };
     imagePreload.src = `${baseUrl}${currentProject.screenshots[newIndex]}`;
@@ -152,7 +142,7 @@ function Projects() {
           ref={projectCardRef}
         >
           <Grid container spacing={3}>
-            <Grid size={12} sx={{md:7}}>
+            <Grid size={landScapes[currentProjectIndex] ? 12 : 7}>
               <div className={styles.projectInfo}>
                 <div className={styles.projectHeader}>
                   {currentProject.icon && (
@@ -212,7 +202,7 @@ function Projects() {
                 </div>
               </div>
             </Grid>
-            <Grid size={12} sx={{md:5}}>
+            <Grid size={landScapes[currentProjectIndex] ? 12 : 5}>
               <div className={styles.projectGallery}>
                 <div className={`${styles.screenshot}`}>
                   <div className={`${styles.screenshotContainer} ${isTransitioningImage ? styles.fadeTransition : ''}`}>
@@ -221,6 +211,7 @@ function Projects() {
                         ref={imageRef}
                         src={`${baseUrl}${currentProject.screenshots[currentImageIndex]}`} 
                         alt={`${currentProject.name} capture d'écran`} 
+                        onLoad={updateContainerHeight}
                       />
                     )}
                   </div>

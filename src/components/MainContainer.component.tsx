@@ -1,5 +1,3 @@
-// MainContainer.component.tsx - Correctifs pour tsParticles
-
 import Grid from "@mui/material/Grid2";
 import styles from "../styles/MainContainer.module.css";
 import NavBar from "./NavBar.component";

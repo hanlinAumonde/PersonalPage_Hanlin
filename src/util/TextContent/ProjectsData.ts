@@ -16,7 +16,7 @@ export interface ProjectsProp {
     projectsData: Project[];
 }
 
-interface ProjectsText {
+export interface ProjectsText {
   sectionTitle: string;
   missionsTitle: string;
   technologiesTitle: string;
@@ -180,7 +180,7 @@ const projectsDataEn: Project[] = [
   }
 ];
 
-const projectsTexts: Record<LanguageContextType, ProjectsText> = {
+export const projectsTexts: Record<LanguageContextType, ProjectsText> = {
   fr: {
     sectionTitle: "Projets",
     missionsTitle: "Missions réalisées",

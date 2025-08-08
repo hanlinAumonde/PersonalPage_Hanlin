@@ -1,5 +1,3 @@
-// Header.component.tsx modernisé
-
 import { useState, useRef, useEffect, useContext } from "react";
 import styles from "../styles/Header.module.css";
 import { languageContext } from "../languageContext";
