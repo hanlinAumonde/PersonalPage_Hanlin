@@ -68,7 +68,12 @@ function Projects() {
     setTimeout(() => {
       setCurrentProjectIndex(newIndex);
       setCurrentImageIndex(0);
-      setTimeout(() => setIsTransitioning(false), 50);
+      setTimeout(() => {
+        if(imageRef.current && imageRef.current.complete) {
+          updateContainerHeight();
+        }
+        setIsTransitioning(false)
+      }, 50);
     }, 300);
   };
 
@@ -211,7 +216,7 @@ function Projects() {
                         ref={imageRef}
                         src={`${baseUrl}${currentProject.screenshots[currentImageIndex]}`} 
                         alt={`${currentProject.name} capture d'écran`} 
-                        onLoad={updateContainerHeight}
+                        //onLoad={updateContainerHeight}
                       />
                     )}
                   </div>

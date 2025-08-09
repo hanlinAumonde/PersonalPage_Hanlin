@@ -1,5 +1,3 @@
-/* Projects.module.css avec effets de transition préservés */
-
 .projectsSection {
   opacity: 0;
   transform: translateY(20px);
