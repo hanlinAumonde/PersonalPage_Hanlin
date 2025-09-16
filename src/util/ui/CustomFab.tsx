@@ -122,7 +122,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
                     onClick={(event) => changeLanguage(event, language === "fr" ? "en" : "fr")}
                     icon={
                         <img
-                            src={language === "fr" ? `${baseUrl}assets/uk_flag.png` : `${baseUrl}assets/france_flag.png`}
+                            src={language === "fr" ? `${baseUrl}assets/france_flag.png` : `${baseUrl}assets/uk_flag.png`}
                             style={{ width: '24px', height: '24px' }}>
                         </img>
                     }
