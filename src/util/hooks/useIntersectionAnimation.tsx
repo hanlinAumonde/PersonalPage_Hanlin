@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 interface UseIntersectionAnimationOptions {
   threshold?: number;
   rootMargin?: string;
+  header: boolean;
 }
 
 /**
@@ -12,10 +13,14 @@ interface UseIntersectionAnimationOptions {
  * @param options.rootMargin
  * @returns [ref, isVisible]
  */
-const useIntersectionAnimation = <T extends HTMLElement>(options: UseIntersectionAnimationOptions = {}) => {
+const useIntersectionAnimation = <T extends HTMLElement>(options: UseIntersectionAnimationOptions = { header: false }) => {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<T>(null);
-    useEffect(() => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, options.header ? 300 : 0);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -32,6 +37,7 @@ const useIntersectionAnimation = <T extends HTMLElement>(options: UseIntersectio
     }
     
     return () => {
+      clearTimeout(timer);
       if (currentElement) {
         observer.unobserve(currentElement);
       }

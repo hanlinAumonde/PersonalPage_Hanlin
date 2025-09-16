@@ -1,16 +1,19 @@
-import { Fab, SpeedDial, SpeedDialAction, SpeedDialIcon, SxProps } from '@mui/material'
+import { SpeedDial, SpeedDialAction, SpeedDialIcon, SxProps } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import { blue } from '@mui/material/colors'
 import UpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Code, DeveloperMode, Person, WorkHistory } from "@mui/icons-material";
 import { useEffect, useRef, useState } from 'react';
+import { LanguageContextType } from '../../languageContext';
 
 type handleClickFunction = () => void
 type CustomFabProps = {
-    changeLayout: boolean
+    changeLayout: boolean;
+    changeLanguage: (_event: React.MouseEvent<HTMLElement>, lang: LanguageContextType) => void;
+    language: LanguageContextType;
 }
 
-const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => { 
+const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, language}) => { 
     const baseUrl = import.meta.env.BASE_URL || '/';
     const [tooltipId, setTooltipId] = useState(-1);
     const timeoutRef = useRef<number | null>(null);
@@ -78,7 +81,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
     };
 
     return (
-        <Grid container direction="column" spacing={2} justifyContent="flex-end" alignItems="flex-end"
+        <Grid container direction="column"  justifyContent="flex-end" alignItems="flex-end"
              sx={{ position: 'fixed', bottom: 16, right: 12, zIndex: 2 }}>
             {changeLayout &&
                 <Grid size={{xs:12}}>
@@ -113,12 +116,27 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout}) => {
                 </Grid>
             }
             <Grid size={{xs:12}}>
-                <Fab   
-                    sx={fabBlueStyle as SxProps}
-                    aria-label='Expand'
-                    onClick={handleScroll2TopClick}>
-                    <UpIcon />
-                </Fab>
+                <SpeedDial
+                    FabProps={{ sx: fabBlueStyle as SxProps }}
+                    ariaLabel='ChangeLanguage'
+                    onClick={(event) => changeLanguage(event, language === "fr" ? "en" : "fr")}
+                    icon={
+                        <img
+                            src={language === "fr" ? `${baseUrl}assets/uk_flag.png` : `${baseUrl}assets/france_flag.png`}
+                            style={{ width: '24px', height: '24px' }}>
+                        </img>
+                    }
+                >
+                </SpeedDial>
+            </Grid>
+            <Grid size={{xs:12}}>
+                <SpeedDial   
+                    FabProps={{ sx: fabBlueStyle as SxProps }}
+                    ariaLabel='ScrollUp'
+                    onClick={handleScroll2TopClick}
+                    icon={<UpIcon />}
+                >
+                </SpeedDial>
             </Grid>
         </Grid>
     );

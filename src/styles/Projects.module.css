@@ -43,54 +43,6 @@
   min-height: 350px;
 }
 
-.carouselControls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--spacing-6);
-}
-
-.carouselArrow {
-  background-color: var(--color-bg-primary) !important;
-  box-shadow: var(--shadow-md) !important;
-  color: var(--color-accent-projects) !important;
-  margin: 0 var(--spacing-2) !important;
-  transition: transform var(--transition-normal) var(--transition-timing),
-              box-shadow var(--transition-normal) var(--transition-timing) !important;
-}
-
-.carouselArrow:hover {
-  transform: scale(1.1);
-  box-shadow: var(--shadow-lg) !important;
-}
-
-.indicators {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-full);
-  background-color: rgba(139, 92, 246, 0.3);
-  border: none;
-  cursor: pointer;
-  transition: all var(--transition-normal) var(--transition-timing);
-  padding: 0;
-}
-
-.indicator:hover {
-  background-color: rgba(139, 92, 246, 0.5);
-}
-
-.activeIndicator {
-  width: 14px;
-  height: 14px;
-  background-color: var(--color-accent-projects);
-}
-
 /* Carte de projet */
 .projectCard {
   background-color: var(--color-bg-primary);
@@ -109,16 +61,18 @@
 /* Galerie d'images */
 .projectGallery {
   position: relative;
-  height: 100%;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  top: 50%;
+    transform: translate(0, -50%);
 }
 
 .screenshot {
   position: relative;
-  width: 100%;
+  width: auto;
   height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -142,40 +96,13 @@
 .screenshot img {
   width: 100%;
   height: auto;
+  max-height: 50vh;
   display: block;
   transition: transform 0.8s var(--transition-timing);
 }
 
 .screenshot:hover img {
   transform: scale(1.05);
-}
-
-.screenshotNavigation {
-  margin-top: var(--spacing-4);
-  bottom: var(--spacing-4);
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-2);
-  z-index: 10;
-}
-
-.screenshotDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgba(139, 92, 246, 0.3);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s var(--transition-timing);
-  padding: 0;
-}
-
-.activeDot {
-  width: 12px;
-  height: 12px;
-  background-color: rgba(138, 92, 246, 0.548);
 }
 
 /* Informations du projet */

@@ -2,14 +2,26 @@ import { IconButton } from "@mui/material";
 import styles from "../styles/Footer.module.css";
 import { ArrowUpward, GitHub, LinkedIn } from "@mui/icons-material";
 import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { languageContext } from "../languageContext";
 import { getFooterText } from "../util/TextContent/FooterData";
+import useIntersectionAnimation from "../util/hooks/useIntersectionAnimation";
 
-export default function Footer() {
+export default function Footer(
+    { setFooterIsVisible }:
+    { setFooterIsVisible: React.Dispatch<React.SetStateAction<boolean>> }
+) {
     const language = useContext(languageContext);
     const footerText = getFooterText(language);
     const changeLayout = useWindowWidthChange();
+    const [footerRef, isVisible] = useIntersectionAnimation<HTMLElement>({ 
+        threshold: 0,
+        header: false
+    });
+
+    useEffect(() => {
+        setFooterIsVisible(isVisible);
+    }, [isVisible]);
     
     const handleScrollToTop = () => {
         window.scrollTo({
@@ -21,7 +33,7 @@ export default function Footer() {
     const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/CV/';
     
     return (
-        <footer className={styles.footer}>
+        <footer className={styles.footer} ref={footerRef}>
             <div className={styles.scrollTop}>
                 <IconButton 
                     aria-label={footerText.scrollToTopText}

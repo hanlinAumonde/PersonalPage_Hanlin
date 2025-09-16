@@ -1,13 +1,14 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "../styles/Header.module.css";
 import { languageContext } from "../languageContext";
 import { getHeaderText } from "../util/TextContent/Header";
+import useIntersectionAnimation from "../util/hooks/useIntersectionAnimation";
 
 export default function Header() {
-  const [isVisible, setIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const headerLanguage = useContext(languageContext);
-  const headerRef = useRef(null);
+
+  const [headerRef, isVisible] = useIntersectionAnimation<HTMLElement>({ header: true });
   
   // Effet de défilement parallaxe
   useEffect(() => {
@@ -21,44 +22,13 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
-  useEffect(() => {
-    // Animation initiale au chargement
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 300);
-    
-    // Intersection Observer pour réappliquer l'animation si nécessaire
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      });
-    }, {
-      threshold: 0.2
-    });
-    
-    if (headerRef.current) {
-      observer.observe(headerRef.current);
-    }
-    
-    return () => {
-      clearTimeout(timer);
-      if (headerRef.current) {
-        observer.unobserve(headerRef.current);
-      }
-    };
-  }, []);
    
   return (
     <header 
       className={styles.header} 
       ref={headerRef}
       style={{
-        backgroundPosition: `center ${scrollPosition * 0.5}px`
+        backgroundPosition: `center ${scrollPosition*0.75}px`
       }}
     >
       <div className={styles.container}>

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, useContext } from 'react';
 import styles from '../../styles/Projects.module.css';
 import Grid from "@mui/material/Grid2";
-import { GitHub, Language, ChevronLeft, ChevronRight } from '@mui/icons-material';
-import IconButton from '@mui/material/IconButton';
+import { GitHub, Language } from '@mui/icons-material';
 import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
 import { languageContext, LanguageContextType } from '../../languageContext';
 import { getProjectsText, ProjectsText } from '../../util/TextContent/ProjectsData';
+import useWindowWidthChange from '../../util/hooks/useWindowWidthChange';
+import CarouselControl from '../../util/ui/CarouselControll';
 
 function Projects() {
   const language: LanguageContextType = useContext(languageContext);
@@ -17,8 +18,8 @@ function Projects() {
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [isTransitioningImage, setIsTransitioningImage] = useState<boolean>(false);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
-  const [landScapes, setLandScapes] = useState<boolean[]>(Array(projectsText.projects.length).fill(true));
   const [projectsRef, isVisible] = useIntersectionAnimation<HTMLElement>();
+  const changeLayout = useWindowWidthChange();
   const projectCardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   
@@ -27,17 +28,15 @@ function Projects() {
 
   // Préchargement des premiers images de chaque projet
   useEffect(() => {
-    let landScapes: boolean[] = [];
-    projectsText.projects.forEach((project,index) => {
+    projectsText.projects.forEach((project) => {
       if (project.screenshots.length > 0) {
         const preloadImage = new Image();
         preloadImage.onload = () => {
-          landScapes[index] = preloadImage.width / preloadImage.height > 1.2;
         };
         preloadImage.src = `${baseUrl}${project.screenshots[0]}`;
       }
     });
-    setLandScapes(landScapes);
+    //setLandScapes(landScapes);
   }, [projectsText.projects, baseUrl]);
   
   // Préchargement de l'image actuelle
@@ -101,43 +100,31 @@ function Projects() {
     const newIndex = currentProjectIndex === projectsText.projects.length - 1 ? 0 : currentProjectIndex + 1;
     changeProject(newIndex);
   };
-  
+
+  const goToPreviousImage = () => {
+    const newIndex = currentImageIndex === 0 ? currentProject.screenshots.length - 1 : currentImageIndex - 1;
+    changeImage(newIndex);
+  };
+
+  const goToNextImage = () => {
+    const newIndex = currentImageIndex === currentProject.screenshots.length - 1 ? 0 : currentImageIndex + 1;
+    changeImage(newIndex);
+  };
+
   return (
     <section 
       ref={projectsRef} 
       className={`${styles.projectsSection} ${isVisible ? styles.visible : ""}`}
     >
       <h2 className={styles.sectionTitle}>{projectsText.sectionTitle}</h2>
-      <div className={styles.carouselControls}>
-        <IconButton 
-          className={styles.carouselArrow} 
-          onClick={goToPreviousProject}
-          disabled={isTransitioning}
-          aria-label={projectsText.previousProjectText}
-        >
-          <ChevronLeft />
-        </IconButton>
-        
-        <div className={styles.indicators}>
-          {projectsText.projects.map((_, index) => (
-            <button 
-              key={index}
-              className={`${styles.indicator} ${index === currentProjectIndex ? styles.activeIndicator : ''}`}
-              onClick={() => changeProject(index)}
-              aria-label={`${projectsText.goToProjectText} ${index + 1}`}
-            />
-          ))}
-        </div>
-        
-        <IconButton 
-          className={styles.carouselArrow} 
-          onClick={goToNextProject}
-          disabled={isTransitioning}
-          aria-label={projectsText.nextProjectText}
-        >
-          <ChevronRight />
-        </IconButton>
-      </div>
+      <CarouselControl 
+        goToPrevious={goToPreviousProject}
+        goToNext={goToNextProject}
+        currentIndex={currentProjectIndex}
+        isTransitioning={isTransitioning}
+        changeItem={changeProject}
+        totalItems={projectsText.projects.length}
+      />
       <div 
         className={styles.projectSliderContainer}
         style={{ height: containerHeight ? `${containerHeight + 40}px` : 'auto' }}
@@ -147,7 +134,7 @@ function Projects() {
           ref={projectCardRef}
         >
           <Grid container spacing={3}>
-            <Grid size={landScapes[currentProjectIndex] ? 12 : 7}>
+            <Grid size={12}>
               <div className={styles.projectInfo}>
                 <div className={styles.projectHeader}>
                   {currentProject.icon && (
@@ -155,13 +142,10 @@ function Projects() {
                       <img src={`${baseUrl}${currentProject.icon}`} alt={`${currentProject.name} icône`} />
                     </div>
                   )}
-                  <h3 className={styles.projectName}>{currentProject.name}</h3>
+                  <h3 className={styles.projectName}>
+                    {currentProject.name}
+                  </h3>
                 </div>
-                
-                <div className={styles.projectContext}>
-                  <p>{currentProject.context}</p>
-                </div>
-                
                 <div className={styles.projectLinks}>
                   {currentProject.repo && (
                     <a 
@@ -174,7 +158,6 @@ function Projects() {
                       <span>{projectsText.sourceCodeText}</span>
                     </a>
                   )}
-                  
                   {currentProject.link && (
                     <a 
                       href={currentProject.link} 
@@ -187,13 +170,33 @@ function Projects() {
                     </a>
                   )}
                 </div>
+                <div className={styles.projectContext}>
+                  <p>{currentProject.context}</p>
+                </div>
                 
+              </div>
+            </Grid>
+            <Grid size={changeLayout? 12 : 6}>
+              <div className={styles.projectInfo}>
                 <div className={styles.projectMissions}>
                   <h4>{projectsText.missionsTitle}</h4>
                   <ul>
-                    {currentProject.missions.map((mission, index) => (
+                    {currentProject.missions.length == 1? 
+                      Object.keys(currentProject.missions[0] as { [key: string]: string[] }).map((section, idx) => (
+                        <li key={idx}>
+                          <strong>{section}:</strong>
+                          <ul>
+                            {(currentProject.missions[0] as { [key: string]: string[] })[section].map((task, taskIdx) => (
+                              <li key={taskIdx}>{task}</li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))
+                    :
+                    (currentProject.missions as string[]).map((mission, index) => (
                       <li key={index}>{mission}</li>
-                    ))}
+                    ))
+                  }
                   </ul>
                 </div>
                 
@@ -207,7 +210,7 @@ function Projects() {
                 </div>
               </div>
             </Grid>
-            <Grid size={landScapes[currentProjectIndex] ? 12 : 5}>
+            <Grid size={changeLayout ? 12 : 6}>
               <div className={styles.projectGallery}>
                 <div className={`${styles.screenshot}`}>
                   <div className={`${styles.screenshotContainer} ${isTransitioningImage ? styles.fadeTransition : ''}`}>
@@ -221,18 +224,16 @@ function Projects() {
                     )}
                   </div>
                 </div>
+                <br/>
                 {currentProject.screenshots.length > 1 && (
-                    <div className={styles.screenshotNavigation}>
-                      {currentProject.screenshots.map((_, index) => (
-                        <button
-                          key={index}
-                          className={`${styles.screenshotDot} ${index === currentImageIndex ? styles.activeDot : ''}`}
-                          onClick={() => changeImage(index)}
-                          aria-label={`Image ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <CarouselControl
+                    goToPrevious={goToPreviousImage}
+                    goToNext={goToNextImage}
+                    currentIndex={currentImageIndex}
+                    isTransitioning={isTransitioningImage}
+                    changeItem={changeImage}
+                  totalItems={currentProject.screenshots.length}
+                />)}
               </div>
             </Grid>
           </Grid>

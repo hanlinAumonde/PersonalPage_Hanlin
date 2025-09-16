@@ -9,7 +9,6 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { ISourceOptions, MoveDirection, OutMode, type Container } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useEffect, useMemo, useState, memo } from "react";
-import CustomFab from "../util/ui/CustomFab";
 import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
 
 function MainContainer() {
@@ -87,7 +86,7 @@ function MainContainer() {
                 default: OutMode.out,
               },
               random: false,
-              speed: 3,
+              speed: 1.5,
               straight: false,
             },
             number: {
@@ -169,7 +168,7 @@ function MainContainer() {
                     }
                 </Grid>
             </Grid>
-            <CustomFab changeLayout={changeLayout} />
+            
         </main>
     );
 }

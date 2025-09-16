@@ -4,7 +4,7 @@ interface Project {
   id: number;
   name: string;
   context: string;
-  missions: string[];
+  missions: string[] | { [key: string]: string[] }[];
   technologies: string[];
   screenshots: string[];
   icon?: string;
@@ -32,24 +32,44 @@ const projectsDataFr: Project[] = [
   {
     id: 1,
     name: "Application de chatroom en ligne",
-    context: "Un projet Web d'apprentissage personnel pour créer une application Web de chat en ligne. \
-              Les utilisateurs s'inscrivent par e-mail, peuvent créer plusieurs salons de discussion et inviter d'autres utilisateurs à les rejoindre, \
-              modifier les propriétés du salon créé et consulter l'historique des conversations du salon correspondant, \
-              les messages sont actualisés en temps réel par l'application.",
+    context: "Un projet avancé mettant en œuvre une application de chat en temps réel basée sur une architecture microservices moderne avec Spring Cloud.\
+              Les utilisateurs s'inscrivent par e-mail, peuvent créer et gérer des salons de discussion, inviter d'autres utilisateurs, et communiquer en temps réel avec une scalabilité horizontale complète.\
+              e-mail, peuvent créer et gérer des salons de discussion, inviter d'autres utilisateurs, et communiquer en temps réel avec une scalabilité horizontale complète.",
     missions: [
-      "Création de la partie frontend de l'application avec Angular 17+, incluant la mise en page CSS, les requêtes API, la gestion des websockets, le routage des pages, etc.",
-      "Implémentation du module de gestion de connexion backend avec Spring Security, ainsi que les différents moyens de connexion en parallèle, y compris la connexion par e-mail et la connexion par code de vérification",
-      "Réalisation d'une séparation complète frontend/backend, et gestion de l'état de connexion via la solution JWTtoken",
-      "Mise en œuvre du côté backend ainsi que des API RESTful, établissement de connexions à la base de données et des services CRUD correspondants",
-      "Implémentation d'un serveur websocket basé sur Spring Boot pour gérer les conversations entre utilisateurs",
-      "Utilisation d'une base de données pour gérer les différentes données de l'application",
-      "Intégrer RabbitMQ pour gérer les demandes de réinitialisation de mot de passe des utilisateurs",
-      "Intégrer Redis pour gérer les sessions des utilisateurs dans le cas de plusieurs instances de l'application",
-      "Mise en œuvre d'un processus préliminaire d'intégration continue avec GitHub Actions et Docker/Docker Compose",
-      "Déployer l'application sur un serveur cloud (AWS EC2) avec Docker et Nginx"
+      {
+        "FrontEnd": [
+          "Réalisation en utilisant Angular 19 avec la dernière stack moderne",
+          "Interface utilisateur responsive avec gestion des WebSockets en temps réel",
+          "Système de routage avancé avec guards d'authentification",
+          "Gestion d'état optimisée pour les sessions distribuées" 
+        ],
+        "Architecture Backend Microservices":[
+          "Eureka Server : Service Discovery et registre de services",
+          "API Gateway : Point d'entrée unifié avec routage intelligent et authentification centralisée",
+          "Auth Service : Service d'authentification dédié avec gestion JWT avancée",
+          "CRUD Service : Gestion des données utilisateurs et salons avec PostgreSQL",
+          "Message Service : Stockage et récupération des messages avec MongoDB",
+          "WebSocket Gateway : Service de messagerie temps réel avec support multi-instance"
+        ],
+        "Infrastructure & DevOps":[
+          "Stack de données : PostgreSQL + MongoDB + Redis (cache distribué)",
+          "Messagerie asynchrone : RabbitMQ pour les événements inter-services",
+          "Monitoring complet : Zipkin (tracing), Prometheus (métriques), Grafana (visualisation)",
+          "Déploiement containerisé : Docker Compose avec orchestration complète",
+          "Observabilité : Spring Boot Actuator sur tous les services"
+        ],
+        "Fonctionnalités avancées":[
+          "Authentification multi-mode (email/password et code de vérification)",
+          "Gestion distribuée des sessions WebSocket via Redis Pub/Sub",
+          "Résilience avec Circuit Breaker (Resilience4j)",
+          "Monitoring et alerting en temps réel",
+          "Scalabilité horizontale automatique des services",
+          "Traçabilité complète des requêtes distribuées"
+        ]
+      }
     ],
-    technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
-    screenshots: ["/chatapp/architecture.png", "/chatapp/CI-CD.png","/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],
+    technologies: ["Angular", "TypeScript", "Java", "API Rest", "Spring-boot", "Spring Cloud", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
+    screenshots: ["/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png", "/chatapp/architecture.png", "/chatapp/CI-CD.png"],
     icon: "/chatapp/chat_icon.png",
     repo: "https://github.com/hanlinAumonde/SimpleChatApp_Devops"
   },
@@ -108,21 +128,40 @@ const projectsDataEn: Project[] = [
   {
     id: 1,
     name: "Online Chatroom Application",
-    context: "A personal learning web project to create an online chat web application. \
-              Users register by email, can create multiple chat rooms and invite other users to join them, \
-              modify the properties of the created room and view the conversation history of the corresponding room, \
-              messages are updated in real time by the application.",
+    context: "A advanced project implementing a real-time chat application based on a modern microservices architecture with Spring Cloud.\
+              Users register via email, can create and manage chat rooms, invite other users, and communicate in real-time with full horizontal scalability.",
     missions: [
-      "Creation of the frontend part of the application with Angular 17+, including CSS layout, API requests, websocket management, page routing, etc.",
-      "Implementation of the backend connection management module with Spring Security, as well as different parallel connection methods, including email connection and verification code connection",
-      "Complete frontend/backend separation, and connection state management via JWTtoken solution",
-      "Backend implementation as well as RESTful APIs, database connections establishment and corresponding CRUD services",
-      "Implementation of a websocket server based on Spring Boot to handle conversations between users",
-      "Use of a database to manage the different data of the application",
-      "Integrate RabbitMQ to handle user password reset requests",
-      "Integrate Redis to manage user sessions in case of multiple application instances",
-      "Implementation of a preliminary continuous integration process with GitHub Actions and Docker/Docker Compose",
-      "Deploy the application on a cloud server (AWS EC2) with Docker and Nginx"
+      {
+        "FrontEnd": [
+          "Built using Angular 19 with the latest modern stack",
+          "Responsive user interface with real-time WebSocket handling",
+          "Advanced routing system with authentication guards",
+          "Optimized state management for distributed sessions"
+        ],
+        "Backend Microservices Architecture":[
+          "Eureka Server: Service Discovery and service registry",
+          "API Gateway: Unified entry point with intelligent routing and centralized authentication",
+          "Auth Service: Dedicated authentication service with advanced JWT management",
+          "CRUD Service: User and room data management with PostgreSQL",
+          "Message Service: Message storage and retrieval with MongoDB",
+          "WebSocket Gateway: Real-time messaging service with multi-instance support"
+        ],
+        "Infrastructure & DevOps":[
+          "Data stack: PostgreSQL + MongoDB + Redis (distributed cache)",
+          "Asynchronous messaging: RabbitMQ for inter-service events",
+          "Comprehensive monitoring: Zipkin (tracing), Prometheus (metrics), Grafana (visualization)",
+          "Containerized deployment: Docker Compose with full orchestration",
+          "Observability: Spring Boot Actuator on all services"
+        ],
+        "Advanced Features":[
+          "Multi-mode authentication (email/password and verification code)",
+          "Distributed WebSocket session management via Redis Pub/Sub",
+          "Resilience with Circuit Breaker (Resilience4j)",
+          "Real-time monitoring and alerting",
+          "Automatic horizontal scalability of services",
+          "Complete traceability of distributed requests"
+        ]
+      }
     ],
     technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
     screenshots: ["/chatapp/architecture.png", "/chatapp/CI-CD.png","/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],

@@ -1,0 +1,47 @@
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-6);
+}
+
+.carouselArrow {
+  background-color: var(--color-bg-primary) !important;
+  box-shadow: var(--shadow-md) !important;
+  color: var(--color-accent-projects) !important;
+  margin: 0 var(--spacing-2) !important;
+  transition: transform var(--transition-normal) var(--transition-timing),
+              box-shadow var(--transition-normal) var(--transition-timing) !important;
+}
+
+.carouselArrow:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.indicators {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: rgba(139, 92, 246, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--transition-timing);
+  padding: 0;
+}
+
+.indicator:hover {
+  background-color: rgba(139, 92, 246, 0.5);
+}
+
+.activeIndicator {
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-accent-projects);
+}
