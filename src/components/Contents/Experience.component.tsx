@@ -21,7 +21,7 @@ export default function Experience() {
       ref={experienceRef}
       className={`${styles.experienceSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>{experienceText.sectionTitle}</h2>
+      <h2 id="experience-heading" className={styles.sectionTitle}>{experienceText.sectionTitle}</h2>
       
       <div className={styles.timeline}>
         {experienceText.experiences.map((experience, index) => (

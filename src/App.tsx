@@ -6,6 +6,7 @@ import MainContainer from './components/MainContainer.component'
 import { languageContext, LanguageContextType } from './languageContext';
 import useWindowWidthChange from './util/hooks/useWindowWidthChange';
 import CustomFab from './util/ui/CustomFab';
+import SEOHead from './seo/SEOHead.component';
 
 function App() {
   const [language, setLanguage] = useState<LanguageContextType>("fr");
@@ -20,16 +21,17 @@ function App() {
 
   return (
     <>
-      <div className="page_container">
-        <languageContext.Provider value={language}>
+      <languageContext.Provider value={language}>
+        <SEOHead />
+        <div className="page_container">
           <Header />
           <MainContainer />
           {!footerIsVisible &&
             <CustomFab changeLayout={changeLayout} changeLanguage={changeLanguage} language={language} />
           }
           <Footer setFooterIsVisible={setFooterIsVisible} />
-        </languageContext.Provider>
-      </div>
+        </div>
+      </languageContext.Provider>
     </>
   )
 }

@@ -163,8 +163,8 @@ const projectsDataEn: Project[] = [
         ]
       }
     ],
-    technologies: ["Angular", "bootstrap", "TypeScript", "Spring-boot", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
-    screenshots: ["/chatapp/architecture.png", "/chatapp/CI-CD.png","/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png"],
+    technologies: ["Angular", "TypeScript", "Java", "API Rest", "Spring-boot", "Spring Cloud", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
+    screenshots: ["/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png","/chatapp/architecture.png", "/chatapp/CI-CD.png"],
     icon: "/chatapp/chat_icon.png",
     repo: "https://github.com/hanlinAumonde/SimpleChatApp_Devops"
   },

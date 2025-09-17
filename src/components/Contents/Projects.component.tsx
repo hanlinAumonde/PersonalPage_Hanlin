@@ -116,7 +116,7 @@ function Projects() {
       ref={projectsRef} 
       className={`${styles.projectsSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>{projectsText.sectionTitle}</h2>
+      <h2 id="projects-heading" className={styles.sectionTitle}>{projectsText.sectionTitle}</h2>
       <CarouselControl 
         goToPrevious={goToPreviousProject}
         goToNext={goToNextProject}

@@ -1,0 +1,21 @@
+{
+  "name": "Hanlin - Ingénieur logiciel junior | Portfolio",
+  "short_name": "Hanlin",
+  "description": "Portfolio de Hanlin, ingénieur logiciel junior diplômé de l'Université de Technologie de Compiègne.",
+  "icons": [
+    {
+      "src": "/PersonalPage_Hanlin/portfolio.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#1976d2",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "start_url": "/PersonalPage_Hanlin/",
+  "scope": "/PersonalPage_Hanlin/",
+  "lang": "fr",
+  "dir": "ltr"
+}

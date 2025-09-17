@@ -6,7 +6,7 @@ import Skills from "./Contents/Skills.component";
 import Experience from "./Contents/Experience.component";
 import Projects from "./Contents/Projects.component";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { ISourceOptions, MoveDirection, OutMode, type Container } from "@tsparticles/engine";
+import { ISourceOptions, MoveDirection, OutMode} from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useEffect, useMemo, useState, memo } from "react";
 import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
@@ -32,8 +32,8 @@ function MainContainer() {
         initializeParticlesEngine();
     }, []);
 
-    const particlesLoaded = async (container?: Container): Promise<void> => {
-        console.log("Particules chargées:", container);
+    const particlesLoaded = async (): Promise<void> => {
+        console.log("Particules loaded");
     };
 
     const options: ISourceOptions = useMemo(
@@ -124,41 +124,49 @@ function MainContainer() {
             
             <Grid container spacing={4} size={{xs:12}} sx={{overflow: 'visible', position: 'relative', zIndex: 2}}>
                 <Grid size={{xs: changeLayout? 12 : 10}} sx={{paddingRight: '2rem'}}>
-                    <div className={`${styles.contentSection} ${styles.profileSection}`} 
+                    <section
+                      className={`${styles.contentSection} ${styles.profileSection}`}
                       style={{
                         background: 'linear-gradient(to right,rgb(187, 232, 251) 0%, rgb(101, 181, 251) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(98, 134, 205, 0.41)',
-                      }} 
-                      id="Profils">
+                      }}
+                      id="Profils"
+                      aria-labelledby="profil-heading">
                         <Profil />
-                    </div>
-                    
-                    <div className={`${styles.contentSection} ${styles.skillsSection}`}
+                    </section>
+
+                    <section
+                      className={`${styles.contentSection} ${styles.skillsSection}`}
                       style={{
                         background: 'linear-gradient(to right,rgb(252, 254, 121) 0%, rgb(254, 255, 221) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(128, 130, 12, 0.44)',
                       }}
-                      id="Skills">
+                      id="Skills"
+                      aria-labelledby="skills-heading">
                         <Skills />
-                    </div>
-                    
-                    <div className={`${styles.contentSection} ${styles.experienceSection}`}
+                    </section>
+
+                    <section
+                      className={`${styles.contentSection} ${styles.experienceSection}`}
                       style={{
                         background: 'linear-gradient(to left,rgb(187, 255, 154) 0%, rgb(244, 255, 230) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(85, 177, 116, 0.52)',
                       }}
-                      id="Experience">
+                      id="Experience"
+                      aria-labelledby="experience-heading">
                         <Experience />
-                    </div>
-                    
-                    <div className={`${styles.contentSection} ${styles.projectsSection}`}
+                    </section>
+
+                    <section
+                      className={`${styles.contentSection} ${styles.projectsSection}`}
                       style={{
                         background: 'linear-gradient(to left,rgb(231, 220, 255) 0%, rgb(199, 254, 255) 100%)',
                         boxShadow: boxShadowStyle + ' rgba(150, 124, 182, 0.41)',
                       }}
-                      id="Projects">
+                      id="Projects"
+                      aria-labelledby="projects-heading">
                         <Projects />
-                    </div>
+                    </section>
                 </Grid>
                 <Grid size={{xs: changeLayout? 0 : 2}} sx={{position: 'relative'}}>
                     {changeLayout? null:

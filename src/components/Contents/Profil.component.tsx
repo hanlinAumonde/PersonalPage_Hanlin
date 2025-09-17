@@ -20,13 +20,13 @@ export default function Profil() {
       ref={profileRef} 
       className={`${styles.profileSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>{profilText.sectionTitle}</h2>
+      <h2 id="profil-heading" className={styles.sectionTitle}>{profilText.sectionTitle}</h2>
       
       <div className={styles.profileContent}>
         <Grid container spacing={isMobile ? 4 : 6} alignItems="center">
           <Grid size={12} sx={{md:7}} className={styles.infoContainer}>
             <div className={styles.nameContainer}>
-              <h2 className={styles.name}><strong>Hanlin WU</strong></h2>
+              <h3 className={styles.name}><strong>Hanlin WU</strong></h3>
             </div>
             
             <div className={styles.bio}>
@@ -52,7 +52,7 @@ export default function Profil() {
               <Grid size={7} className={styles.photoContainer}>
                 <div className={styles.imageWrapper}>
                   <div className={styles.imageBorder}>
-                    <img src={`${baseUrl}assets/photo.jpg`} alt="Hanlin" className={styles.profileImage} />
+                    <img src={`${baseUrl}assets/photo.jpg`} alt="Portrait professionnel de Hanlin WU, développeur systèmes et réseaux" className={styles.profileImage} />
                   </div>
                   <div className={styles.imageBackground}></div>
                 </div>
@@ -60,7 +60,7 @@ export default function Profil() {
               
               <Grid size={5} className={styles.logoContainer}>
                 <div className={styles.logoWrapper}>
-                  <img src={`${baseUrl}assets/logo_utc.png`} alt="UTC" className={styles.logo} />
+                  <img src={`${baseUrl}assets/logo_utc.png`} alt="Logo de l'Université de Technologie de Compiègne (UTC)" className={styles.logo} />
                 </div>
               </Grid>
             </Grid>

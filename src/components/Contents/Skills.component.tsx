@@ -21,7 +21,7 @@ export default function Skills() {
       ref={sectionRef} 
       className={`${styles.skillsSection} ${isVisible ? styles.visible : ""}`}
     >
-      <h2 className={styles.sectionTitle}>{skillsText.sectionTitle}</h2>
+      <h2 id="skills-heading" className={styles.sectionTitle}>{skillsText.sectionTitle}</h2>
       
       {skillsText.categories.map((category, index) => (
         <div 
