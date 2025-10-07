@@ -50,7 +50,7 @@ export default function Footer(
                     <div className={styles.footerLogo}>
                         <h3 className={styles.footerName}>Hanlin WU</h3>
                     </div>
-                        <div className={styles.footerSocial}>
+                    <div className={styles.footerSocial}>
                         {changeLayout && (
                             <>
                                 <a 
@@ -74,9 +74,9 @@ export default function Footer(
                             </>
                         )}
                         <a 
-                        href={baseUrl + "Hanlin_WU_CV_2025.pdf"}
-                        target="_blank" 
-                        className={styles.socialLink}
+                            href={baseUrl + "Hanlin_WU_CV_2025.pdf"}
+                            target="_blank" 
+                            className={styles.socialLink}
                         >
                             <span>{footerText.resumeText}</span>
                         </a>

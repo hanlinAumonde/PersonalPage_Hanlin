@@ -18,8 +18,10 @@ const useIntersectionAnimation = <T extends HTMLElement>(options: UseIntersectio
   const elementRef = useRef<T>(null);
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, options.header ? 300 : 0);
+      if (options.header) {
+        setIsVisible(true);
+      }
+    }, 300);
 
     const observer = new IntersectionObserver(
       ([entry]) => {

@@ -129,6 +129,14 @@
   box-shadow: var(--shadow-lg);
 }
 
+.contextText {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-6);
+  line-height: 1.6;
+}
+
 .achievementsTitle {
   font-family: var(--font-accent);
   font-size: var(--text-lg);
@@ -179,6 +187,29 @@
   height: 8px;
   background-color: var(--color-accent-experience);
   border-radius: 50%;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.techTag {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--color-accent-experience);
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal) var(--transition-timing);
+}
+
+.techTag:hover {
+  background-color: var(--color-accent-experience);
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

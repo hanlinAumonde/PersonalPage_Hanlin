@@ -15,7 +15,7 @@ const footerTexts: Record<LanguageContextType, FooterText> = {
         scrollToTopText: "Retour en haut",
         githubText: "GitHub",
         linkedinText: "LinkedIn",
-        resumeText: "Résumé",
+        resumeText: "Mon CV",
         copyrightText: "Tous droits réservés.",
         creditsText: "Icônes par",
         creditsLinkText: "freepik-icons"
@@ -24,7 +24,7 @@ const footerTexts: Record<LanguageContextType, FooterText> = {
         scrollToTopText: "Back to top",
         githubText: "GitHub",
         linkedinText: "LinkedIn",
-        resumeText: "Resume",
+        resumeText: "My Resume",
         copyrightText: "All rights reserved.",
         creditsText: "Icons by",
         creditsLinkText: "freepik-icons"

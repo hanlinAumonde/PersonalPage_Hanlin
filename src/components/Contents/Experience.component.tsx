@@ -41,6 +41,9 @@ export default function Experience() {
             </div>
             
             <div className={styles.achievementsContainer}>
+              <h4 className={styles.achievementsTitle}>{experienceText.contextTitle}</h4>
+              <p className={styles.contextText}>{experience.context}</p>
+
               <h4 className={styles.achievementsTitle}>{experienceText.achievementsTitle}</h4>
               <ul className={styles.achievementsList}>
                 {experience.achievements.map((achievement, i) => (
@@ -49,6 +52,14 @@ export default function Experience() {
                   </li>
                 ))}
               </ul>
+              
+              <br/>
+              <h4 className={styles.achievementsTitle}>{experienceText.technologiesTitle}</h4>
+              <div className={styles.techTags}>
+                {experience.technologies.map((tech, i) => (
+                  <span key={i} className={styles.techTag}>{tech}</span>
+                ))}
+              </div>
             </div>
           </div>
         ))}

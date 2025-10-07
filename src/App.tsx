@@ -29,7 +29,7 @@ function App() {
           {!footerIsVisible &&
             <CustomFab changeLayout={changeLayout} changeLanguage={changeLanguage} language={language} />
           }
-          <Footer setFooterIsVisible={setFooterIsVisible} />
+          <Footer setFooterIsVisible={setFooterIsVisible}/>
         </div>
       </languageContext.Provider>
     </>

@@ -5,13 +5,17 @@ interface ExperienceItem {
   title: string;
   company: string;
   period: string;
+  context: string;
   achievements: string[];
+  technologies: string[];
 }
 
 interface ExperienceText {
   sectionTitle: string;
+  contextTitle: string;
   achievementsTitle: string;
   experiences: ExperienceItem[];
+  technologiesTitle: string;
 }
 
 // Données d'expérience en français
@@ -20,56 +24,68 @@ const experiencesFr: ExperienceItem[] = [
         title: "Développeur Back-end Java EE",
         company: "Renault Group",
         period: "03/2024 - 08/2024",
+        context: "Migration d'une application backend Java d'intégration de documentation véhicule suite à des problèmes de compatibilité de dépendances avec MongoDB et Apache Camel, impactant les performances et la scalabilité du système",
         achievements: [
-        "Contribué à la refonte d'une application d'intégration de la documentation véhicules",
-        "Optimisé le processus de gestion documentaire avec le Framework Apache Camel, en utilisant une base MongoDB",
-        "Dirigé la migration de l'application vers Spring Boot avec la dernière version d'Apache Camel, améliorant la performance et la scalabilité (en effectuant des POC dans différents scénarios)",
-        "Refait tous les tests unitaires vers JUnit 5 pour assurer la fiabilité et la robustesse des fonctionnalités critiques"
-        ]
+            "Familiariser rapidement avec Apache Camel, puis développer des POCs comparatifs entre Spring Boot et Quarkus",
+            "Collaborer avec l'équipe et le Product Owner pour établir la stratégie de migration basée sur les résultats du POC",
+            "Participer activement à la refonte complète de l'architecture applicative, améliorer des performances de 18%",
+            "Moderniser la suite de tests unitaires (migration vers JUnit 5)"
+        ],
+        technologies: ["Java", "Spring Boot", "Apache Camel", "MongoDB", "JUnit 5"]
     },
     {
         title: "Assistant Ingénieur",
         company: "Cerema",
         period: "11/2021 - 04/2022",
+        context: "Développement d'un outil de pilotage automatique pour navires intégré à un logiciel de simulation maritime interne",
         achievements: [
-        "Développement d'un outil de pilotage automatique de bateau en milieu fluvial basé sur un logiciel 'Navmer', permettant la définition et l'optimisation des commandes nécessaires au pilotage du bateau en fonction de son état actuel",
-        "Le travail consistait à apprendre les algorithmes de navigation et de pilotage sur les articles scientifiques, analyser les différentes solutions existantes et proposer une solution optimale pour le pilotage automatique, puis développer des algorithmes en Python"
-        ]
+        "Rechercher et sélectionner d'algorithmes de navigation optimaux via analyse bibliographique approfondie",
+        "Implémenter et optimiser itérative des algorithmes, réduisant de 50% le lacet et améliorant significativement la stabilité de la navigation"
+        ],
+        technologies: ["Python", "Algorithmes de contrôle/navigation"]
     } 
 ];
 
 // Données d'expérience en anglais
 const experiencesEn: ExperienceItem[] = [
     {
-        title: "Java EE Back-end Developer",
+        title: "Back-end Java EE Developer",
         company: "Renault Group",
         period: "03/2024 - 08/2024",
+        context: "Migration of a Java backend application for vehicle documentation integration due to dependency compatibility issues with MongoDB and Apache Camel, impacting system performance and scalability",
         achievements: [
-        "Contributed to the redesign of a vehicle documentation integration application",
-        "Optimized document management process with Apache Camel Framework, using MongoDB database",
-        "Led the application migration to Spring Boot with the latest version of Apache Camel, improving performance and scalability (by performing POCs in different scenarios)",
-        "Rewrote all unit tests to JUnit 5 to ensure reliability and robustness of critical functionalities"
-        ]
+            "Quickly familiarize with Apache Camel, then develop comparative POCs between Spring Boot and Quarkus",
+            "Collaborate with the team and Product Owner to establish the migration strategy based on POC results",
+            "Actively participate in the complete redesign of the application architecture, improving performance by 18%",
+            "Modernize the unit test suite (migration to JUnit 5)"
+        ],
+        technologies: ["Java", "Spring Boot 3", "Apache Camel 4", "MongoDB", "JUnit 5", "Agile (SCRUM)", "Jira", "Confluence"]
     },
     {
         title: "Assistant Engineer",
         company: "Cerema",
         period: "11/2021 - 04/2022",
+        context: "Development of an automatic steering tool for ships integrated into an internal maritime simulation software",
         achievements: [
-        "Development of an automatic boat piloting tool in fluvial environment based on 'Navmer' software, enabling the definition and optimization of commands necessary for boat piloting according to its current state",
-        "The work consisted of learning navigation and piloting algorithms from scientific articles, analyzing different existing solutions and proposing an optimal solution for automatic piloting, then developing algorithms in Python"
-        ]
+        "Researched and selected optimal navigation algorithms through in-depth bibliographic analysis",
+        "Implemented and iteratively optimized algorithms, reducing yaw by 50% and significantly improving navigation stability"
+        ],
+        technologies: ["Python", "Algorithms for control/navigation"]
     } 
 ];
 
 const experienceTexts: Record<LanguageContextType, ExperienceText> = {
     fr: {
         sectionTitle: "Expérience professionnelle",
+        contextTitle: "Contexte",
         achievementsTitle: "Réalisations clés",
+        technologiesTitle: "Technologies",
         experiences: experiencesFr
     },
     en: {
         sectionTitle: "Professional Experience",
+        contextTitle: "Context",
+        technologiesTitle: "Technologies",
         achievementsTitle: "Key Achievements",
         experiences: experiencesEn
     }
