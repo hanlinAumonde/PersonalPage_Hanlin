@@ -1,8 +1,10 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
+import {LanguageContextType} from "../../config/languageContext.ts";
+import {getMenuItem} from "../TextContent/NavBarText.ts";
 
-const useScrollSpy = (setActiveLink:Dispatch<SetStateAction<number>>) => {
+const useScrollSpy = (setActiveLink:Dispatch<SetStateAction<number>>, language: LanguageContextType) => {
     useEffect(() => {
-        const sectionIds = ['Profils', 'Skills', 'Experience', 'Projects'];
+        const sectionIds = getMenuItem(language);
         const sections = sectionIds.map(id => document.getElementById(id));
 
         const observer = new IntersectionObserver(
@@ -26,7 +28,7 @@ const useScrollSpy = (setActiveLink:Dispatch<SetStateAction<number>>) => {
                 if (section) observer.unobserve(section);
             });
         };
-    }, [setActiveLink]);
+    }, [setActiveLink,language]);
 };
 
 export default useScrollSpy;

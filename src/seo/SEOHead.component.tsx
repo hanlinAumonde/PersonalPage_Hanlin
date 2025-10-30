@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
-import { languageContext } from '../languageContext';
+import { languageContext } from '../config/languageContext.ts';
 import { getSEOConfig, getPersonStructuredData } from './seoConfig';
 
 interface SEOHeadProps {

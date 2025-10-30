@@ -1,4 +1,4 @@
-import { LanguageContextType } from "../../languageContext";
+import { LanguageContextType } from "../../config/languageContext.ts";
 
 interface Project {
   id: number;
@@ -247,7 +247,3 @@ export const projectsTexts: Record<LanguageContextType, ProjectsText> = {
 export const getProjectsText = (language: LanguageContextType): ProjectsText => {
   return projectsTexts[language] || projectsTexts.fr;
 };
-
-// Pour la rétrocompatibilité
-const projectsData = projectsDataFr;
-export default projectsData;

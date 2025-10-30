@@ -1,9 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Stack, Alert, CircularProgress, Box } from "@mui/material";
 import emailjs from '@emailjs/browser';
 import { useContext, useState } from "react";
-import { languageContext } from "../../languageContext";
+import { languageContext } from "../../config/languageContext.ts";
 import { getContactDialogText } from "../TextContent/ContactDialogText";
-import { EMAILJS_CONFIG } from "../../Emailjs_config";
+import { EMAILJS_CONFIG } from "../../config/Emailjs_config.ts";
 import SendIcon from '@mui/icons-material/Send';
 
 const SendMessageDialog: React.FC<{ open: boolean; setOpen: React.Dispatch<React.SetStateAction<boolean>> }> = ({ open, setOpen }) => {

@@ -7,29 +7,25 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import { useState } from "react";
+import {useContext, useState} from "react";
 import useScrollSpy from "../util/hooks/useScrollSpy";
+import {getMenuItem} from "../util/TextContent/NavBarText.ts";
+import {languageContext} from "../config/languageContext.ts";
 
 export default function NavBar() {
     const [open, setOpen] = useState(true);
     const [activeLink, setActiveLink] = useState(0); 
     const baseUrl = import.meta.env.BASE_URL || '/';
-
-    const menuItems = [
-        { name: 'Profils', link: '#profils' },
-        { name: 'Skills', link: '#skills' },
-        { name: 'Experience', link: '#experience' },
-        { name: 'Projects', link: '#projects' }
-    ];
+    const language = useContext(languageContext);
 
     const handleClick = () => {
         setOpen(!open);
     };
 
-    useScrollSpy(setActiveLink);
+    useScrollSpy(setActiveLink,language);
 
     const handleScroll = (id: number) => {
-        const element = document.getElementById(menuItems[id].name);
+        const element = document.getElementById(getMenuItem(language)[id]);
         if (element) {
             element.scrollIntoView({ 
                 behavior: 'smooth',
@@ -59,42 +55,42 @@ export default function NavBar() {
             <ListItemIcon>
                 <Portrait />
             </ListItemIcon>
-            <ListItemText primary="Portfolio" />
+            <ListItemText primary="Menu" />
             {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[0].link} 
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={'#'+getMenuItem(language)[0]}
                     selected={activeLink === 0}
                     onClick={() => handleMenuClick(0)}>
                     <ListItemIcon>
                         <Person />
                     </ListItemIcon>
-                    <ListItemText primary="Profils" />
+                    <ListItemText primary={getMenuItem(language)[0]} />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[1].link}
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={'#'+getMenuItem(language)[1]}
                     selected={activeLink === 1}
                     onClick={() => handleMenuClick(1)}>
                     <ListItemIcon>
                         <Code />
                     </ListItemIcon>
-                    <ListItemText primary="Skills" />
+                    <ListItemText primary={getMenuItem(language)[1]} />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[2].link}
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={'#'+getMenuItem(language)[2]}
                     selected={activeLink === 2}
                     onClick={() => handleMenuClick(2)}>
                     <ListItemIcon>
                         <WorkHistory />
                     </ListItemIcon>
-                    <ListItemText primary="Experience" />
+                    <ListItemText primary={getMenuItem(language)[2]} />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={menuItems[3].link}
+                <ListItemButton sx={{ pl: 4, ":hover":{color:'black'} }} href={'#'+getMenuItem(language)[3]}
                     selected={activeLink === 3}
                     onClick={() => handleMenuClick(3)}>
                     <ListItemIcon>
                         <DeveloperMode/>
                     </ListItemIcon>
-                    <ListItemText primary="Projets" />
+                    <ListItemText primary={getMenuItem(language)[3]} />
                 </ListItemButton>
             </List>
         </Collapse>

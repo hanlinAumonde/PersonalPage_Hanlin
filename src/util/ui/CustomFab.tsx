@@ -4,7 +4,7 @@ import { blue } from '@mui/material/colors'
 import UpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Code, DeveloperMode, Person, WorkHistory } from "@mui/icons-material";
 import { useEffect, useRef, useState } from 'react';
-import { LanguageContextType } from '../../languageContext';
+import { LanguageContextType } from '../../config/languageContext.ts';
 import SendMessageDialog from './SendMessageDialog';
 
 type handleClickFunction = () => void
@@ -102,7 +102,7 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
                                     tooltip:{
                                         title: action.name,
                                         placement: 'left',
-                                        open: tooltipId === action.id? true : false,
+                                        open: tooltipId === action.id,
                                         onTouchStart: () => {
                                             setTooltipId(action.id);
                                             handleScroll(action.id);
@@ -126,7 +126,9 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
                         icon={
                             <img
                                 src={language === "fr" ? `${baseUrl}assets/france_flag.png` : `${baseUrl}assets/uk_flag.png`}
-                                style={{ width: '24px', height: '24px' }}>
+                                style={{ width: '24px', height: '24px' }}
+                                alt={"language_flag"}
+                            >
                             </img>
                         }
                     >
@@ -140,7 +142,9 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
                         icon={
                             <img
                                 src={`${baseUrl}assets/email.svg`}
-                                style={{ width: '24px', height: '24px' }}>
+                                style={{ width: '24px', height: '24px' }}
+                                alt={'SendMessage'}
+                            >
                             </img>
                             }
                     >

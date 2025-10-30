@@ -1,4 +1,4 @@
-import { LanguageContextType } from "../../languageContext";
+import { LanguageContextType } from "../../config/languageContext.ts";
 
 const headerTexts: Record<LanguageContextType, { title: string; subtitle: string }> = {
     en: {

@@ -4,7 +4,7 @@ import useIntersectionAnimation from "../../util/hooks/useIntersectionAnimation"
 import useMultipleIntersectionAnimation from "../../util/hooks/useMultipleIntersectionAnimation";
 import { getSkillsText } from "../../util/TextContent/SkillsData";
 import { useContext } from "react";
-import { languageContext } from "../../languageContext";
+import { languageContext } from "../../config/languageContext.ts";
 
 export default function Skills() {
   const language = useContext(languageContext);

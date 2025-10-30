@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "../styles/Header.module.css";
-import { languageContext } from "../languageContext";
+import { languageContext } from "../config/languageContext.ts";
 import { getHeaderText } from "../util/TextContent/Header";
 import useIntersectionAnimation from "../util/hooks/useIntersectionAnimation";
 

@@ -1,4 +1,4 @@
-import { LanguageContextType } from "../../languageContext";
+import { LanguageContextType } from "../../config/languageContext.ts";
 
 const baseUrl = (import.meta.env.BASE_URL || '/') + 'assets/skills/';
 

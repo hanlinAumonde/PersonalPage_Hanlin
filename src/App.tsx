@@ -3,7 +3,7 @@ import './App.css'
 import Footer from './components/Footer.component'
 import Header from './components/Header.component'
 import MainContainer from './components/MainContainer.component'
-import { languageContext, LanguageContextType } from './languageContext';
+import { languageContext, LanguageContextType } from './config/languageContext.ts';
 import useWindowWidthChange from './util/hooks/useWindowWidthChange';
 import CustomFab from './util/ui/CustomFab';
 import SEOHead from './seo/SEOHead.component';

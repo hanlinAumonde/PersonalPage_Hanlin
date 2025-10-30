@@ -3,7 +3,7 @@ import styles from "../styles/Footer.module.css";
 import { ArrowUpward, GitHub, LinkedIn } from "@mui/icons-material";
 import useWindowWidthChange from "../util/hooks/useWindowWidthChange";
 import { useContext, useEffect } from "react";
-import { languageContext } from "../languageContext";
+import { languageContext } from "../config/languageContext.ts";
 import { getFooterText } from "../util/TextContent/FooterData";
 import useIntersectionAnimation from "../util/hooks/useIntersectionAnimation";
 
@@ -21,7 +21,7 @@ export default function Footer(
 
     useEffect(() => {
         setFooterIsVisible(isVisible);
-    }, [isVisible]);
+    }, [isVisible, setFooterIsVisible]);
     
     const handleScrollToTop = () => {
         window.scrollTo({

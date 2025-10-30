@@ -3,7 +3,7 @@ import styles from "../../styles/Profil.module.css";
 import { useMediaQuery, useTheme } from "@mui/material";
 import useIntersectionAnimation from "../../util/hooks/useIntersectionAnimation";
 import { useContext } from "react";
-import { languageContext } from "../../languageContext";
+import { languageContext } from "../../config/languageContext.ts";
 import { getProfilText } from "../../util/TextContent/ProfilData";
 
 export default function Profil() {

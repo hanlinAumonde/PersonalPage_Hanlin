@@ -1,4 +1,4 @@
-import { LanguageContextType } from "../../languageContext";
+import { LanguageContextType } from "../../config/languageContext.ts";
 
 // Interface pour les données d'expérience
 interface ExperienceItem {
@@ -94,7 +94,3 @@ const experienceTexts: Record<LanguageContextType, ExperienceText> = {
 export const getExperienceText = (language: LanguageContextType): ExperienceText => {
     return experienceTexts[language] || experienceTexts.fr;
 };
-
-// Pour la rétrocompatibilité
-const experiences = experiencesFr;
-export default experiences;

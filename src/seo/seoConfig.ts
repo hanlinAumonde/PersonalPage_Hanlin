@@ -1,4 +1,4 @@
-import { LanguageContextType } from '../languageContext';
+import { LanguageContextType } from '../config/languageContext.ts';
 
 export interface SEOConfig {
   title: string;

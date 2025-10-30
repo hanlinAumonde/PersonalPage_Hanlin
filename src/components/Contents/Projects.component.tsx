@@ -3,7 +3,7 @@ import styles from '../../styles/Projects.module.css';
 import Grid from "@mui/material/Grid2";
 import { GitHub, Language } from '@mui/icons-material';
 import useIntersectionAnimation from '../../util/hooks/useIntersectionAnimation';
-import { languageContext, LanguageContextType } from '../../languageContext';
+import { languageContext, LanguageContextType } from '../../config/languageContext.ts';
 import { getProjectsText, ProjectsText } from '../../util/TextContent/ProjectsData';
 import useWindowWidthChange from '../../util/hooks/useWindowWidthChange';
 import CarouselControl from '../../util/ui/CarouselControll';
