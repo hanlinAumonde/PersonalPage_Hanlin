@@ -6,6 +6,7 @@ import { Code, DeveloperMode, Person, WorkHistory } from "@mui/icons-material";
 import { useEffect, useRef, useState } from 'react';
 import { LanguageContextType } from '../../config/languageContext.ts';
 import SendMessageDialog from './SendMessageDialog';
+import {getMenuItem} from "../TextContent/NavBarText.ts";
 
 type handleClickFunction = () => void
 type CustomFabProps = {
@@ -44,10 +45,10 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
     }
 
     const actions = [
-        { id:5, icon: <Person/>, name: 'Profils' },
-        { id:4, icon: <Code />, name: 'Skills' },
-        { id:3, icon: <WorkHistory />, name: 'Experience' },
-        { id:2, icon: <DeveloperMode />, name: 'Projects' },
+        { id:5, icon: <Person/>, name: getMenuItem(language)[0] },
+        { id:4, icon: <Code />, name: getMenuItem(language)[1] },
+        { id:3, icon: <WorkHistory />, name: getMenuItem(language)[2] },
+        { id:2, icon: <DeveloperMode />, name: getMenuItem(language)[3] },
         { id:1, icon: <img src={`${baseUrl}assets/LinkedIn_icon.svg`} alt="LinkedIn"
                             style={{ width: '24px', height: '24px' }}/>, name: 'LinkedIn', 
                 link: 'https://www.linkedin.com/in/hanlin-wu-559552213/' },
