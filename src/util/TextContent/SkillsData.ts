@@ -29,7 +29,9 @@ const skillsCategoriesFr: SkillCategory[] = [
       { name: "TypeScript", logo: `${baseUrl}typescript.svg`},
       { name: "HTML5", logo: `${baseUrl}html.svg`},
       { name: "CSS3", logo: `${baseUrl}css.svg`},
+      { name: "Tailwind CSS", logo: `${baseUrl}tailwindcss.svg`},
       { name: "ReactJS", logo: `${baseUrl}react.svg`},
+      { name: "Next.js", logo: `${baseUrl}nextjs.svg`},
       { name: "Angular", logo: `${baseUrl}angular.svg`},
     ]
   },
@@ -39,15 +41,19 @@ const skillsCategoriesFr: SkillCategory[] = [
     icon: '🔧',
     skills: [
       { name: "Java", logo: `${baseUrl}java.svg`},
+      { name: "JavaFX", logo: `${baseUrl}javafx.svg`},
       { name: "Python", logo: `${baseUrl}python.svg`},
       { name: "C++", logo: `${baseUrl}cpp.svg`},
+      { name: "Qt", logo: `${baseUrl}qt.svg`},
       { name: "Golang", logo: `${baseUrl}golang.svg`},
       { name: "SQL", logo: `${baseUrl}sql.svg`},
-      { name: "Spring-boot", logo: `${baseUrl}spring.svg`},
+      { name: "Spring-boot  Spring-cloud", logo: `${baseUrl}spring.svg`},
       { name: "FastAPI", logo: `${baseUrl}fastapi.svg`},
+      { name: "GraphQL", logo: `${baseUrl}graphql.svg`},
       { name: "Apache Camel", logo: `${baseUrl}apache-camel.svg`},
       { name: "PostgreSQL", logo: `${baseUrl}postgresql.svg`},
       { name: "MongoDB", logo: `${baseUrl}mongodb.svg`},
+      { name: "Redis", logo: `${baseUrl}redis.svg`},
       { name: "RabbitMQ", logo: `${baseUrl}rabbitmq.svg`},
     ]
   },
@@ -64,6 +70,8 @@ const skillsCategoriesFr: SkillCategory[] = [
       { name: "Restful API", logo: `${baseUrl}api.svg`},
       { name: "AWS", logo: `${baseUrl}aws.svg`},
       { name: "Nginx", logo: `${baseUrl}nginx.svg`},
+      { name: "JUnit", logo: `${baseUrl}junit.svg`},
+      { name: "pytest", logo: `${baseUrl}pytest.svg`},
     ]
   }
 ];
@@ -78,7 +86,9 @@ const skillsCategoriesEn: SkillCategory[] = [
       { name: "TypeScript", logo: `${baseUrl}typescript.svg`},
       { name: "HTML5", logo: `${baseUrl}html.svg`},
       { name: "CSS3", logo: `${baseUrl}css.svg`},
+      { name: "Tailwind CSS", logo: `${baseUrl}tailwindcss.svg`},
       { name: "ReactJS", logo: `${baseUrl}react.svg`},
+      { name: "Next.js", logo: `${baseUrl}nextjs.svg`},
       { name: "Angular", logo: `${baseUrl}angular.svg`},
     ]
   },
@@ -88,15 +98,19 @@ const skillsCategoriesEn: SkillCategory[] = [
     icon: '🔧',
     skills: [
       { name: "Java", logo: `${baseUrl}java.svg`},
+      { name: "JavaFX", logo: `${baseUrl}javafx.svg`},
       { name: "Python", logo: `${baseUrl}python.svg`},
       { name: "C++", logo: `${baseUrl}cpp.svg`},
+      { name: "Qt", logo: `${baseUrl}qt.svg`},
       { name: "Golang", logo: `${baseUrl}golang.svg`},
       { name: "SQL", logo: `${baseUrl}sql.svg`},
       { name: "Spring-boot", logo: `${baseUrl}spring.svg`},
       { name: "FastAPI", logo: `${baseUrl}fastapi.svg`},
+      { name: "GraphQL", logo: `${baseUrl}graphql.svg`},
       { name: "Apache Camel", logo: `${baseUrl}apache-camel.svg`},
       { name: "PostgreSQL", logo: `${baseUrl}postgresql.svg`},
       { name: "MongoDB", logo: `${baseUrl}mongodb.svg`},
+      { name: "Redis", logo: `${baseUrl}redis.svg`},
       { name: "RabbitMQ", logo: `${baseUrl}rabbitmq.svg`},
     ]
   },
@@ -113,6 +127,8 @@ const skillsCategoriesEn: SkillCategory[] = [
       { name: "Restful API", logo: `${baseUrl}api.svg`},
       { name: "AWS", logo: `${baseUrl}aws.svg`},
       { name: "Nginx", logo: `${baseUrl}nginx.svg`},
+      { name: "JUnit", logo: `${baseUrl}junit.svg`},
+      { name: "pytest", logo: `${baseUrl}pytest.svg`},
     ]
   }
 ];

@@ -1,7 +1,6 @@
 import { LanguageContextType } from "../../config/languageContext.ts";
 
 interface Project {
-  id: number;
   name: string;
   context: string;
   missions: string[] | { [key: string]: string[] }[];
@@ -30,7 +29,24 @@ export interface ProjectsText {
 
 const projectsDataFr: Project[] = [
   {
-    id: 1,
+    name:"Video App - Gestionnaire vidéo auto-hébergé",
+    context: "Une application full-stack auto-hébergée pour cataloguer, rechercher et lire des vidéos stockées sur un disque local ou un stockage compatible S3. \
+             Elle génère des vignettes, gère les métadonnées (titre, auteur, tags, séries, favoris) et intègre un lecteur avec diffusion en continu.",
+    missions: [
+      "Concevoir une architecture backend par domaine (catalog, browsing, playback, migration) dont le sens des dépendances est vérifié par un test d'architecture",
+      "Développer une API GraphQL avec FastAPI et Strawberry, incluant requêtes, mutations et subscriptions WebSocket",
+      "Implémenter une abstraction de stockage commune au système de fichiers local et aux buckets S3 (MinIO/RustFS)",
+      "Créer une interface Angular 22 (standalone, signals, Material, Tailwind) avec recherche paginée, filtres, édition des métadonnées et gestion des séries",
+      "Mettre en place le streaming vidéo par requêtes Range, la génération de vignettes et la transcodification à la volée avec ffmpeg",
+      "Développer un système de migration de fichiers avec progression en temps réel, reprise après redémarrage et verrous par chemin",
+      "Conteneuriser l'ensemble des services (frontend, backend, MongoDB, Redis, RustFS) avec Docker Compose"
+    ],
+    technologies: ["Python", "FastAPI", "Strawberry GraphQL", "MongoDB", "Angular", "TypeScript", "Tailwind CSS", "Video.js", "Redis", "Docker", "Nginx", "S3"],
+    screenshots:["/video-app/homepage.png", "/video-app/search.png", "/video-app/video-player.png", "/video-app/file-browser.png", "/video-app/directory-browse.png", "/video-app/edit-metadata.png", "/video-app/edit-metadata-tags.png", "/video-app/migration-tasks.png"],
+    icon:"/video-app/icon.png",
+    repo:"https://github.com/hanlinAumonde/selfhosted-tagged-local-video-manager"
+  },
+  {
     name: "Application de chatroom en ligne",
     context: "Un projet avancé mettant en œuvre une application de chat en temps réel basée sur une architecture microservices moderne avec Spring Cloud.\
               Les utilisateurs s'inscrivent par e-mail, peuvent créer et gérer des salons de discussion, inviter d'autres utilisateurs, et communiquer en temps réel avec une scalabilité horizontale complète.\
@@ -74,7 +90,24 @@ const projectsDataFr: Project[] = [
     repo: "https://github.com/hanlinAumonde/SimpleChatApp_Devops"
   },
   {
-    id: 2,
+    name:"Magic Tower - Jeu d'aventure en Java",
+    context: "Un jeu de rôle de type « Magic Tower » développé en Java avec JavaFX et FXGL. \
+             Le jeu propose 10 étages chargés depuis des fichiers JSON, un système de combat au tour par tour, \
+             des équipements, des compétences actives et passives, ainsi qu'un système de sauvegarde multi-emplacements.",
+    missions: [
+      "Concevoir une architecture modulaire séparant le moteur de jeu, le contenu et l'interface (JavaFX/FXGL)",
+      "Développer le moteur de combat au tour par tour avec calcul des dégâts, compétences et effets",
+      "Mettre en place le chargement des niveaux, monstres, objets et compétences depuis des fichiers JSON avec Jackson",
+      "Implémenter les systèmes d'équipement, de combinaisons de compétences et de raccourcis clavier",
+      "Créer les menus du jeu : menu principal, sauvegarde automatique et 9 emplacements manuels, inventaire et ensembles d'équipement",
+      "Développer une interface entièrement pilotable au clavier"
+    ],
+    technologies: ["Java", "JavaFX", "FXGL", "Jackson", "Maven", "JUnit"],
+    screenshots:["/motagame/main-menu.png", "/motagame/gameplay.png", "/motagame/equipment.png", "/motagame/skill-combos.png", "/motagame/monster-skills.png", "/motagame/equipment-presets.png", "/motagame/save-menu.png", "/motagame/load-menu.png"],
+    icon:"/motagame/icon.png",
+    repo:"https://github.com/hanlinAumonde/MotaGame"
+  },
+  {
     name: "Site Web du cours LO18 de l'UTC",
     context: "En collaboration avec trois autres étudiants, j'ai créé un site Web d'information sur le cours LO18 de l'UTC, développé à l'aide de Reactjs+Nextjs, \
               qui comprend une introduction à la philosophie du cours, le plan du cours, les commentaires des étudiants et d'autres informations.\
@@ -90,7 +123,6 @@ const projectsDataFr: Project[] = [
     link: "https://www4.utc.fr/lo18"
   },
   {
-    id: 3,
     name: "Calculatrice scientifique App",
     context: "L'application de calculatrice scientifique développée en collaboration avec quatre autres étudiants comprend des calculs d'addition, \
               de soustraction, de multiplication et de division de base, prend en charge les calculs entre les nombres réels, les fractions et les nombres complexes, \
@@ -104,29 +136,29 @@ const projectsDataFr: Project[] = [
     screenshots: ["/cppqt/calculatrice.jpg"],
     icon: "/cppqt/calculateur_icon.png",
     repo:"https://github.com/hanlinAumonde/projet-comput-Science"
-  },
-  {
-    id:4,
-    name:"LocalTaggedVideo_ManagementTool",
-    context: "Un petit outil simple pour visualiser et rechercher des fichiers vidéo locaux, \
-             utilisant une base de données MongoDB pour stocker et récupérer les informations d'étiquetage des fichiers vidéo, \
-             permettant d'ajouter des étiquettes aux vidéos et de rechercher des vidéos par étiquette.",
-    missions: [
-      "Parcourir et organiser les fichiers vidéo locaux avec tri et recherche intégrés",
-      "Ajouter et supprimer des tags aux fichiers vidéo sélectionnés",
-      "Rechercher des vidéos par un ou plusieurs tags avec suggestions automatiques",
-      "Intégration avec MongoDB, avec démarrage automatique d'un conteneur Docker si nécessaire"
-    ],
-    technologies: ["Python", "MongoDB", "Tkinter", "Docker"],
-    screenshots:["/videoTagManage/1.png", "/videoTagManage/2.png", "/videoTagManage/3.png"],
-    icon:"/videoTagManage/tags.ico",
-    repo:"https://github.com/hanlinAumonde/Manage_LocalTaggedVideo"
   }
 ];
 
 const projectsDataEn: Project[] = [
   {
-    id: 1,
+    name:"Video App - Self-hosted Video Manager",
+    context: "A self-hosted full-stack application for cataloging, searching and streaming videos stored on a local disk or S3-compatible storage. \
+             It generates thumbnails, manages metadata (title, author, tags, series, favourites) and includes a built-in video player.",
+    missions: [
+      "Designed a capability-based backend architecture (catalog, browsing, playback, migration) with a one-way dependency chain enforced by an architecture test",
+      "Built a GraphQL API with FastAPI and Strawberry, including queries, mutations and WebSocket subscriptions",
+      "Implemented a shared storage abstraction over the local filesystem and S3-compatible buckets (MinIO/RustFS)",
+      "Created an Angular 22 frontend (standalone, signals, Material, Tailwind) with paginated search, filters, metadata editing and series management",
+      "Added range-request video streaming, thumbnail generation and on-the-fly transcoding with ffmpeg",
+      "Developed a file migration system with real-time progress, crash recovery and per-path locks",
+      "Containerized all services (frontend, backend, MongoDB, Redis, RustFS) with Docker Compose"
+    ],
+    technologies: ["Python", "FastAPI", "Strawberry GraphQL", "MongoDB", "Angular", "TypeScript", "Tailwind CSS", "Video.js", "Redis", "Docker", "Nginx", "S3"],
+    screenshots:["/video-app/homepage.png", "/video-app/search.png", "/video-app/video-player.png", "/video-app/file-browser.png", "/video-app/directory-browse.png", "/video-app/edit-metadata.png", "/video-app/edit-metadata-tags.png", "/video-app/migration-tasks.png"],
+    icon:"/video-app/icon.png",
+    repo:"https://github.com/hanlinAumonde/selfhosted-tagged-local-video-manager"
+  },
+  {
     name: "Online Chatroom Application",
     context: "A advanced project implementing a real-time chat application based on a modern microservices architecture with Spring Cloud.\
               Users register via email, can create and manage chat rooms, invite other users, and communicate in real-time with full horizontal scalability.",
@@ -169,7 +201,24 @@ const projectsDataEn: Project[] = [
     repo: "https://github.com/hanlinAumonde/SimpleChatApp_Devops"
   },
   {
-    id: 2,
+    name:"Magic Tower - Java Adventure Game",
+    context: "A Magic Tower-style role-playing game built in Java with JavaFX and FXGL. \
+             The game features 10 floors loaded from JSON files, turn-based combat, equipment, \
+             active and passive skills, and a multi-slot save system.",
+    missions: [
+      "Designed a modular architecture separating the game engine, content and UI (JavaFX/FXGL)",
+      "Built the turn-based battle engine with damage calculation, skills and effects",
+      "Implemented data-driven loading of levels, monsters, items and skills from JSON files using Jackson",
+      "Developed the equipment, skill combo preset and keyboard shortcut systems",
+      "Created the game menus: main menu, auto-save plus 9 manual save slots, inventory and equipment loadouts",
+      "Built a fully keyboard-driven interface"
+    ],
+    technologies: ["Java", "JavaFX", "FXGL", "Jackson", "Maven", "JUnit"],
+    screenshots:["/motagame/main-menu.png", "/motagame/gameplay.png", "/motagame/equipment.png", "/motagame/skill-combos.png", "/motagame/monster-skills.png", "/motagame/equipment-presets.png", "/motagame/save-menu.png", "/motagame/load-menu.png"],
+    icon:"/motagame/icon.png",
+    repo:"https://github.com/hanlinAumonde/MotaGame"
+  },
+  {
     name: "UTC LO18 Course Website",
     context: "In collaboration with three other students, I created an information website for the UTC LO18 course, developed using Reactjs+Nextjs, \
               which includes an introduction to the course philosophy, course plan, student comments and other information.\
@@ -185,7 +234,6 @@ const projectsDataEn: Project[] = [
     link: "https://www4.utc.fr/lo18"
   },
   {
-    id: 3,
     name: "Scientific Calculator App",
     context: "The scientific calculator application developed in collaboration with four other students includes basic addition, \
               subtraction, multiplication and division calculations, supports calculations between real numbers, fractions and complex numbers, \
@@ -199,23 +247,6 @@ const projectsDataEn: Project[] = [
     screenshots: ["/cppqt/calculatrice.jpg"],
     icon: "/cppqt/calculateur_icon.png",
     repo:"https://github.com/hanlinAumonde/projet-comput-Science"
-  },
-  {
-    id:4,
-    name:"LocalTaggedVideo_ManagementTool",
-    context: "A simple small tool to view and search local video files, \
-             using a MongoDB database to store and retrieve video file tagging information, \
-             allowing to add tags to videos and search videos by tag.",
-    missions: [
-      "Browse and organize local video files with integrated sorting and search",
-      "Add and remove tags to selected video files",
-      "Search videos by one or more tags with automatic suggestions",
-      "Integration with MongoDB, with automatic Docker container startup if needed"
-    ],
-    technologies: ["Python", "MongoDB", "Tkinter", "Docker"],
-    screenshots:["/videoTagManage/1.png", "/videoTagManage/2.png", "/videoTagManage/3.png"],
-    icon:"/videoTagManage/tags.ico",
-    repo:"https://github.com/hanlinAumonde/Manage_LocalTaggedVideo"
   }
 ];
 
