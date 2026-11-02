@@ -44,6 +44,18 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
         });
     }
 
+    const languageFlags: Record<LanguageContextType, string> = {
+        fr: `${baseUrl}assets/france_flag.png`,
+        en: `${baseUrl}assets/uk_flag.png`,
+        zh: `${baseUrl}assets/china_flag.svg`
+    };
+
+    const nextLanguage: Record<LanguageContextType, LanguageContextType> = {
+        fr: 'en',
+        en: 'zh',
+        zh: 'fr'
+    };
+
     const actions = [
         { id:5, icon: <Person/>, name: getMenuItem(language)[0] },
         { id:4, icon: <Code />, name: getMenuItem(language)[1] },
@@ -123,10 +135,10 @@ const CustomFab:React.FC<CustomFabProps> = ({changeLayout, changeLanguage, langu
                     <SpeedDial
                         FabProps={{ sx: fabBlueStyle as SxProps }}
                         ariaLabel='ChangeLanguage'
-                        onClick={(event) => changeLanguage(event, language === "fr" ? "en" : "fr")}
+                        onClick={(event) => changeLanguage(event, nextLanguage[language])}
                         icon={
                             <img
-                                src={language === "fr" ? `${baseUrl}assets/france_flag.png` : `${baseUrl}assets/uk_flag.png`}
+                                src={languageFlags[language]}
                                 style={{ width: '24px', height: '24px' }}
                                 alt={"language_flag"}
                             >

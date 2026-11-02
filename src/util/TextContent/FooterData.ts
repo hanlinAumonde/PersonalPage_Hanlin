@@ -28,6 +28,15 @@ const footerTexts: Record<LanguageContextType, FooterText> = {
         copyrightText: "All rights reserved.",
         creditsText: "Icons by",
         creditsLinkText: "freepik-icons"
+    },
+    zh: {
+        scrollToTopText: "返回顶部",
+        githubText: "GitHub",
+        linkedinText: "LinkedIn",
+        resumeText: "我的简历",
+        copyrightText: "保留所有权利。",
+        creditsText: "图标来源：",
+        creditsLinkText: "freepik-icons"
     }
 };
 

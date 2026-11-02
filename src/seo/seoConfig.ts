@@ -53,6 +53,27 @@ const seoData: Record<LanguageContextType, SEOConfig> = {
     type: "website",
     image: "/portfolio.svg",
     url: "https://hanlinAumonde.github.io/PersonalPage_Hanlin"
+  },
+  zh: {
+    title: "Hanlin - 初级软件工程师 | 个人作品集",
+    description: "Hanlin 的个人作品集，毕业于贡比涅技术大学计算机工程专业。了解我的项目和技术能力。",
+    keywords: [
+      "Hanlin",
+      "应届毕业生",
+      "开发者",
+      "软件工程师",
+      "UTC",
+      "作品集",
+      "计算机工程",
+      "Web 开发",
+      "全栈开发",
+      "后端开发",
+      "前端开发"
+    ],
+    author: "Hanlin",
+    type: "website",
+    image: "/portfolio.svg",
+    url: "https://hanlinAumonde.github.io/PersonalPage_Hanlin"
   }
 };
 
@@ -63,17 +84,29 @@ export const getSEOConfig = (language: LanguageContextType): SEOConfig => {
 export const getPersonStructuredData = (language: LanguageContextType) => {
   const seo = getSEOConfig(language);
 
+  const jobTitles: Record<LanguageContextType, string> = {
+    fr: "Ingénieur logiciel Junior",
+    en: "Junior Software Engineer",
+    zh: "初级软件工程师"
+  };
+
+  const universities: Record<LanguageContextType, string> = {
+    fr: "Université de Technologie de Compiègne",
+    en: "University of Technology of Compiègne",
+    zh: "贡比涅技术大学"
+  };
+
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Hanlin",
-    "jobTitle": language === 'fr' ? "Ingénieur logiciel Junior" : "Junior Software Engineer",
+    "jobTitle": jobTitles[language],
     "description": seo.description,
     "url": seo.url,
     "image": `${seo.url}${seo.image}`,
     "alumniOf": {
       "@type": "CollegeOrUniversity",
-      "name": language === 'fr' ? "Université de Technologie de Compiègne" : "University of Technology of Compiègne",
+      "name": universities[language],
       "sameAs": "https://www.utc.fr/"
     },
     "knowsAbout": [

@@ -21,6 +21,11 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   const language = useContext(languageContext);
   const seoConfig = getSEOConfig(language);
   const structuredData = getPersonStructuredData(language);
+  const ogLocale = {
+    fr: 'fr_FR',
+    en: 'en_US',
+    zh: 'zh_CN'
+  } as const;
 
   const pageTitle = title ? `${title} | ${seoConfig.author}` : seoConfig.title;
   const pageDescription = description || seoConfig.description;
@@ -46,7 +51,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:url" content={pageUrl} />
       <meta property="og:type" content={seoConfig.type} />
       <meta property="og:site_name" content={seoConfig.author} />
-      <meta property="og:locale" content={language === 'fr' ? 'fr_FR' : 'en_US'} />
+      <meta property="og:locale" content={ogLocale[language]} />
 
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -70,6 +75,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       {/* Language alternate tags */}
       <link rel="alternate" hrefLang="fr" href={`${seoConfig.url}?lang=fr`} />
       <link rel="alternate" hrefLang="en" href={`${seoConfig.url}?lang=en`} />
+      <link rel="alternate" hrefLang="zh" href={`${seoConfig.url}?lang=zh`} />
       <link rel="alternate" hrefLang="x-default" href={seoConfig.url} />
     </Helmet>
   );

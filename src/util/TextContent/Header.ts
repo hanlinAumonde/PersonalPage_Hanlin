@@ -8,6 +8,10 @@ const headerTexts: Record<LanguageContextType, { title: string; subtitle: string
     fr: {
         title: "Bonjour ! Je suis Hanlin WU",
         subtitle: "Jeune diplômé de l'UTC en 2024"
+    },
+    zh: {
+        title: "你好！我是 Hanlin WU",
+        subtitle: "2024 年毕业于 UTC"
     }
 }
 

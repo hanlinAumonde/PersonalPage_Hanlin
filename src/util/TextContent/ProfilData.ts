@@ -25,6 +25,14 @@ const profilTexts: Record<LanguageContextType, ProfilText> = {
             paragraph2: "Passionate about computer science, discovering and learning new technologies. I seek to implement my technical skills in innovative projects.",
             highlight: "the University of Technology of Compiègne"
         }
+    },
+    zh: {
+        sectionTitle: "个人简介",
+        bio: {
+            paragraph1: "毕业于{highlight}，主修计算机系统与网络专业。",
+            paragraph2: "热衷于计算机科学，喜欢探索和学习新技术，希望将自己的技术能力应用到创新的项目中。",
+            highlight: "贡比涅技术大学"
+        }
     }
 };
 

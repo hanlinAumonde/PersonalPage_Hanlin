@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import {useContext, useState} from "react";
 import useScrollSpy from "../util/hooks/useScrollSpy";
-import {getMenuItem} from "../util/TextContent/NavBarText.ts";
+import {getMenuItem, getMenuLabel} from "../util/TextContent/NavBarText.ts";
 import {languageContext} from "../config/languageContext.ts";
 
 export default function NavBar() {
@@ -47,7 +47,7 @@ export default function NavBar() {
             subheader={
                 <ListSubheader sx={{ bgcolor: 'rgb(221, 219, 219)' }}
                     component="div" id="nested-list-subheader">
-                    Menu
+                    {getMenuLabel(language)}
                 </ListSubheader>
             }
     >
@@ -55,7 +55,7 @@ export default function NavBar() {
             <ListItemIcon>
                 <Portrait />
             </ListItemIcon>
-            <ListItemText primary="Menu" />
+            <ListItemText primary={getMenuLabel(language)} />
             {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>

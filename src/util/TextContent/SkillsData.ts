@@ -133,6 +133,17 @@ const skillsCategoriesEn: SkillCategory[] = [
   }
 ];
 
+const skillsCategoryTitlesZh: Record<string, string> = {
+  frontend: '前端',
+  backend: '后端',
+  devops: 'DevOps 及其他'
+};
+
+const skillsCategoriesZh: SkillCategory[] = skillsCategoriesEn.map((category) => ({
+  ...category,
+  title: skillsCategoryTitlesZh[category.id] || category.title
+}));
+
 const skillsTexts: Record<LanguageContextType, SkillsText> = {
   fr: {
     sectionTitle: "Compétences",
@@ -141,6 +152,10 @@ const skillsTexts: Record<LanguageContextType, SkillsText> = {
   en: {
     sectionTitle: "Skills",
     categories: skillsCategoriesEn
+  },
+  zh: {
+    sectionTitle: "专业技能",
+    categories: skillsCategoriesZh
   }
 };
 

@@ -250,6 +250,109 @@ const projectsDataEn: Project[] = [
   }
 ];
 
+const projectsDataZh: Project[] = [
+  {
+    name:"Video App - 自托管视频管理器",
+    context: "一个自托管的视频管理平台，用于对本地磁盘或兼容 S3 的存储中的视频进行编目、搜索和在线播放。应用可生成缩略图，管理标题、作者、标签、系列和收藏等元数据，并内置流媒体播放器。",
+    missions: [
+      "设计按业务能力划分的后端架构（catalog、browsing、playback、migration），并通过架构测试强制约束单向依赖",
+      "使用 FastAPI 与 Strawberry 开发 GraphQL API，包含查询、变更和 WebSocket 订阅",
+      "实现统一存储抽象，同时支持本地文件系统和兼容 S3 的对象存储（MinIO/RustFS）",
+      "使用 Angular 22（standalone、signals、Material、Tailwind）构建前端，支持分页搜索、筛选、元数据编辑和系列管理",
+      "实现基于 Range 请求的视频流式播放、缩略图生成和 ffmpeg 实时转码",
+      "开发文件迁移系统，支持实时进度、崩溃恢复和基于路径的锁",
+      "使用 Docker Compose 容器化所有服务（前端、后端、MongoDB、Redis、RustFS）"
+    ],
+    technologies: ["Python", "FastAPI", "Strawberry GraphQL", "MongoDB", "Angular", "TypeScript", "Tailwind CSS", "Video.js", "Redis", "Docker", "Nginx", "S3"],
+    screenshots:["/video-app/homepage.png", "/video-app/search.png", "/video-app/video-player.png", "/video-app/file-browser.png", "/video-app/directory-browse.png", "/video-app/edit-metadata.png", "/video-app/edit-metadata-tags.png", "/video-app/migration-tasks.png"],
+    icon:"/video-app/icon.png",
+    repo:"https://github.com/hanlinAumonde/selfhosted-tagged-local-video-manager"
+  },
+  {
+    name: "在线聊天室应用",
+    context: "一个高级项目，基于现代 Spring Cloud 微服务架构实现实时聊天应用。用户可通过邮箱注册，创建和管理聊天室，邀请其他用户，并进行实时通信，支持完整的水平扩展。",
+    missions: [
+      {
+        "前端": [
+          "使用 Angular 19 和最新现代技术栈实现",
+          "响应式用户界面，实时处理 WebSocket",
+          "带身份验证守卫的高级路由系统",
+          "针对分布式会话优化的状态管理"
+        ],
+        "后端微服务架构":[
+          "Eureka Server：服务发现与服务注册",
+          "API Gateway：统一入口，智能路由与集中式鉴权",
+          "Auth Service：独立认证服务，支持高级 JWT 管理",
+          "CRUD Service：使用 PostgreSQL 管理用户和聊天室数据",
+          "Message Service：使用 MongoDB 存储和检索消息",
+          "WebSocket Gateway：支持多实例的实时消息服务"
+        ],
+        "基础设施与 DevOps":[
+          "数据栈：PostgreSQL + MongoDB + Redis（分布式缓存）",
+          "异步消息：使用 RabbitMQ 处理服务间事件",
+          "完整监控：Zipkin（链路追踪）、Prometheus（指标）、Grafana（可视化）",
+          "容器化部署：Docker Compose 全量编排",
+          "可观测性：所有服务启用 Spring Boot Actuator"
+        ],
+        "高级功能":[
+          "多模式认证（邮箱/密码和验证码）",
+          "通过 Redis Pub/Sub 实现分布式 WebSocket 会话管理",
+          "使用 Circuit Breaker（Resilience4j）实现容错",
+          "实时监控与告警",
+          "服务自动水平扩展",
+          "分布式请求的完整可追溯性"
+        ]
+      }
+    ],
+    technologies: ["Angular", "TypeScript", "Java", "API Rest", "Spring-boot", "Spring Cloud", "WebSocket", "JWT", "MongoDB", "PostgreSQL", "RabbitMQ", "Redis", "Docker", "Nginx", "GitHub Actions", "AWS EC2"],
+    screenshots: ["/chatapp/login-page-pwd.png", "/chatapp/login-page-code.png", "/chatapp/accueil-page.png", "/chatapp/chatroom.png", "/chatapp/create-compte.png", "/chatapp/forget-password.png", "/chatapp/architecture.png", "/chatapp/CI-CD.png"],
+    icon: "/chatapp/chat_icon.png",
+    repo: "https://github.com/hanlinAumonde/SimpleChatApp_Devops"
+  },
+  {
+    name:"魔塔 - Java 冒险游戏",
+    context: "使用 Java、JavaFX 和 FXGL 开发的《魔塔》风格角色扮演游戏。游戏包含 10 层关卡（从 JSON 文件加载）、回合制战斗、装备系统、主动与被动技能，以及多存档位系统。",
+    missions: [
+      "设计模块化架构，分离游戏引擎、内容与界面（JavaFX/FXGL）",
+      "开发回合制战斗引擎，实现伤害计算、技能与效果",
+      "使用 Jackson 从 JSON 文件加载关卡、怪物、物品和技能",
+      "实现装备、技能组合预设和键盘快捷键系统",
+      "创建游戏菜单：主菜单、自动存档与 9 个手动存档位、背包和装备套装",
+      "开发完全支持键盘操作的界面"
+    ],
+    technologies: ["Java", "JavaFX", "FXGL", "Jackson", "Maven", "JUnit"],
+    screenshots:["/motagame/main-menu.png", "/motagame/gameplay.png", "/motagame/equipment.png", "/motagame/skill-combos.png", "/motagame/monster-skills.png", "/motagame/equipment-presets.png", "/motagame/save-menu.png", "/motagame/load-menu.png"],
+    icon:"/motagame/icon.png",
+    repo:"https://github.com/hanlinAumonde/MotaGame"
+  },
+  {
+    name: "UTC LO18 课程网站",
+    context: "与其他三名同学合作，为 UTC 的 LO18 课程创建信息网站，使用 Reactjs + Nextjs 开发，包含课程理念介绍、课程安排、学生评价等信息。",
+    missions: [
+      "开发部分课程内容展示组件",
+      "参与页面设计和多媒体资源管理",
+      "参与部分 CSS 动画开发"
+    ],
+    technologies: ["Reactjs", "Nextjs", "MUI", "CSS"],
+    screenshots: ["/lo18/home-page.png", "/lo18/programme-page.png", "/lo18/evaluation-page.png"],
+    icon: "/lo18/favicon.ico",
+    link: "https://www4.utc.fr/lo18"
+  },
+  {
+    name: "科学计算器应用",
+    context: "与另外四名同学合作开发的科学计算器应用，支持加、减、乘、除基本运算，支持实数、分数和复数之间的计算，支持三角函数等多种计算功能，支持表达式创建和历史记录回溯。",
+    missions: [
+      "参与应用的整体 UML 设计",
+      "参与字面量与运算符相关的基础类和方法开发",
+      "参与图形界面开发"
+    ],
+    technologies: ["C++", "QT", "Cmake"],
+    screenshots: ["/cppqt/calculatrice.jpg"],
+    icon: "/cppqt/calculateur_icon.png",
+    repo:"https://github.com/hanlinAumonde/projet-comput-Science"
+  }
+];
+
 export const projectsTexts: Record<LanguageContextType, ProjectsText> = {
   fr: {
     sectionTitle: "Projets",
@@ -272,6 +375,17 @@ export const projectsTexts: Record<LanguageContextType, ProjectsText> = {
     nextProjectText: "Next Project",
     goToProjectText: "Go to project",
     projects: projectsDataEn
+  },
+  zh: {
+    sectionTitle: "项目展示",
+    missionsTitle: "主要工作",
+    technologiesTitle: "技术栈",
+    sourceCodeText: "源代码",
+    websiteText: "网站",
+    previousProjectText: "上一个项目",
+    nextProjectText: "下一个项目",
+    goToProjectText: "前往项目",
+    projects: projectsDataZh
   }
 };
 

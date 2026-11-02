@@ -1,3 +1,5 @@
+import { LanguageContextType } from "../../config/languageContext.ts";
+
 const texts = {
     fr: {
         title: 'Contact',
@@ -22,9 +24,21 @@ const texts = {
         sending: 'Sending...',
         success: 'Message sent successfully!',
         error: 'Error sending message. Please try again.'
+    },
+    zh: {
+        title: '联系我',
+        firstName: '名',
+        lastName: '姓',
+        email: '邮箱',
+        message: '留言',
+        cancel: '关闭',
+        send: '发送',
+        sending: '发送中...',
+        success: '消息发送成功！',
+        error: '发送失败，请重试。'
     }
 };
 
-export const getContactDialogText = (language: 'fr' | 'en') => {
+export const getContactDialogText = (language: LanguageContextType) => {
     return texts[language] || texts.fr;
 }
